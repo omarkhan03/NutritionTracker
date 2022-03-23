@@ -24,15 +24,18 @@ public class NutritionTrackerMain {
      */
     public static void editNutrientAndTarget(HashMap<String, Integer> nutrientTargets, Scanner scanner){
         System.out.println("----------------------------------------------------------");
-        System.out.println("What nutrient would you like to add? e.g. protein (g): ");
-        String nutrient = scanner.nextLine();
+        System.out.println("Enter the name of the nutrient would you like to add (e.g. protein): ");
+        String name = scanner.nextLine();
 
-        System.out.println(String.format("Enter the target for the nutrient %s", nutrient));
+        System.out.println("Enter the unit you would like to measure the nutrient with (e.g. grams): ");
+        String unit = scanner.nextLine();
+
+        System.out.println(String.format("Enter the target for the nutrient %s", name));
         int target = scanner.nextInt();
-        nutrientTargets.put(nutrient, target);
+
+        Nutrient nutrient = new Nutrient(name, target, unit);
 
         System.out.println("Added nutrient " + nutrient + " and assigned " + target + " as the target ");
-        nutrientTargets.replace(nutrient, target);
         System.out.println("----------------------------------------------------------");
     }
 
