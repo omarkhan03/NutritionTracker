@@ -241,6 +241,7 @@ public class NutritionTrackerMain {
                 "6)  View nutrients that are within daily target\n" +
                 "7)  View average consumption of a nutrient for across selected days\n" +
                 "8)  Compare nutrient consumption between two days\n\n" +
+                "Save/Load Data\n" +
                 "9)  Exit program";
     }
 
@@ -284,6 +285,9 @@ public class NutritionTrackerMain {
             }
             if (input.equals("8")){
                 compareCustomDays(nutrientQuantities, scanner);
+            }
+            else{
+                System.out.println("Input invalid");
             }
         }
         System.out.println("----------------------------------------------------------");
