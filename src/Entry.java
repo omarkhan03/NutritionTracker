@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class Entry implements Comparator<Entry>{
+public class Entry {
     private int day;
     private Nutrient nutrient;
     private double consumption;
