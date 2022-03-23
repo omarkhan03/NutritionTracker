@@ -10,7 +10,7 @@ public class NutrientTable {
 
     public String createTable() {
         StringBuilder tableBuilder = new StringBuilder();
-        tableBuilder.append("NUTRIENT" + "\t" + "UNIT" + "\t" + "TARGET");
+        tableBuilder.append("NUTRIENT" + "\t" + "UNIT" + "\t" + "TARGET" + "\n");
 
         for (Nutrient nutrient : inputs) {
             String nutrientName = nutrient.getName();
