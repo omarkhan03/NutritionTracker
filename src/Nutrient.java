@@ -4,10 +4,10 @@ public class Nutrient {
     private String unit;
     private double target;
 
-    public Nutrient(String name, double target, String unit){
+    public Nutrient(String name, String unit, double target){
         this.name = name;
-        this.target = target;
         this.unit = unit;
+        this.target = target;
     }
 
     public String getName() {
