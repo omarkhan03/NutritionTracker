@@ -28,10 +28,10 @@ public class EntryTable {
         return table;
     }
 
-    public double getAverage(Nutrient nutrient){
+    public double getAverage(String nutrient){
         int count = 0; double avg = 0;
         for(Entry entry : inputs){
-            if(entry.getNutrientName().equals(nutrient.getName())){
+            if(entry.getNutrientName().equals(nutrient)){
                 count++;
                 avg = avg + entry.getConsumption();
             }
