@@ -40,7 +40,7 @@ public class EntryTable {
         return avg;
     }
     //test
-    public String compareTwoDays(Nutrient nutrient, int day1, int day2){
+    public String compareTwoDays(String nutrient, int day1, int day2){
         for(Entry entry : inputs){
             if((entry.getDay() == day1) && (entry.getNutrientName().equals(nutrient))){
                 for(Entry entry2 : inputs){
