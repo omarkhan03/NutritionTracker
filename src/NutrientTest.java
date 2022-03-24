@@ -372,7 +372,28 @@ class NutrientTest {
     }
 
     @Test
-    void createNutrientTable() {
+    void createNutrientTable_1_Nutrient() {
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        ArrayList<Nutrient> nutrientList;
+        nutrientList = new ArrayList<Nutrient>();
+        nutrientList.add(0,fiber);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 NUTRIENT | UNIT | TARGET
+                 fiber | g | 20.0
+                 ----------------------------------------------------------""";
+
+        NutrientTable actualTable = new NutrientTable(nutrientList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createNutrientTable_2_Nutrients() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -395,4 +416,73 @@ class NutrientTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void createNutrientTable_3_Nutrients() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        ArrayList<Nutrient> nutrientList;
+        nutrientList = new ArrayList<Nutrient>();
+        nutrientList.add(0,fiber);
+        nutrientList.add(1,protein);
+        nutrientList.add(2,calories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 NUTRIENT | UNIT | TARGET
+                 fiber | g | 20.0
+                 protein | g | 100.0
+                 calories | kcal | 2500.0
+                 ----------------------------------------------------------""";
+
+        NutrientTable actualTable = new NutrientTable(nutrientList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createNutrientTable_Skipped_Nutrient() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        ArrayList<Nutrient> nutrientList;
+        nutrientList = new ArrayList<Nutrient>();
+        nutrientList.add(0,fiber);
+        nutrientList.add(1,calories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 NUTRIENT | UNIT | TARGET
+                 fiber | g | 20.0
+                 calories | kcal | 2500.0
+                 ----------------------------------------------------------""";
+
+        NutrientTable actualTable = new NutrientTable(nutrientList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createNutrientTable_No_Nutrients() {
+
+        ArrayList<Nutrient> nutrientList;
+        nutrientList = new ArrayList<Nutrient>();
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 NUTRIENT | UNIT | TARGET
+                 ----------------------------------------------------------""";
+
+        NutrientTable actualTable = new NutrientTable(nutrientList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
 }
