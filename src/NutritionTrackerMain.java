@@ -119,7 +119,7 @@ public class NutritionTrackerMain {
 
             if (input.equals("7")){
                 System.out.println("----------------------------------------------------------");
-                System.out.println("Please enter a nutrient and measuring unit e.g. protein (g).");
+                System.out.println("Please enter the name of the nutrient you would like to view data for: ");
                 String nutrient = scanner.nextLine();
 
                 EntryTable entryTable = new EntryTable(entries);

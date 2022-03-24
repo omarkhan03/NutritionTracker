@@ -11,13 +11,13 @@ public class NutrientTable {
     public String createTable() {
         StringBuilder tableBuilder = new StringBuilder();
         tableBuilder.append("----------------------------------------------------------\n");
-        tableBuilder.append("NUTRIENT" + "\t" + "UNIT" + "\t" + "TARGET" + "\n");
+        tableBuilder.append("NUTRIENT | UNIT | TARGET\n");
 
         for (Nutrient nutrient : inputs) {
             String nutrientName = nutrient.getName();
             String nutrientUnit = nutrient.getUnit();
             double nutrientTarget = nutrient.getTarget();
-            tableBuilder.append(nutrientName + "\t" + nutrientUnit + "\t" + nutrientTarget + "\n");
+            tableBuilder.append(nutrientName + " | " + nutrientUnit + " | " + nutrientTarget + "\n");
         }
         tableBuilder.append("----------------------------------------------------------");
         return tableBuilder.toString();
