@@ -9,6 +9,8 @@ as well as enter the quantity of that nutrient consumed for any day (day 1, day 
 stored data, as well as calculated data described in the menu and javadocs.
 */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Array;
 import java.util.*;
 
@@ -29,7 +31,9 @@ public class NutritionTrackerMain {
                 "7)  View average consumption of a nutrient for across selected days\n" +
                 "8)  Compare nutrient consumption between two days\n\n" +
                 "Save/Load Data\n" +
-                "9)  Exit program";
+                "9)  Save data to file\n" +
+                "10) Load Data from file\n\n" +
+                "11) Exit program";
     }
 
     public static void main (String[] args){
@@ -37,11 +41,27 @@ public class NutritionTrackerMain {
         ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
         ArrayList<Entry> entries = new ArrayList<Entry>();
         if (args.length == 1){
-
+            try {
+                File file = new File(args[1]);
+                Scanner scanner = new Scanner(file);
+                while(!scanner.nextLine().equals("")){
+                    String fileIn = scanner.nextLine();
+                    String[] in = fileIn.split(",");
+                    if (in.length == 5){
+                        Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
+                        Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
+                        entries.add(entry);
+                    }
+                }
+            }
+            catch (FileNotFoundException e){
+                System.err.println("File could not be found: " + args[1]);
+                System.exit(1);
+            }
         }
         String input = "";
         Scanner scanner = new Scanner(System.in);
-        while (!input.equals("9")){
+        while (!input.equals("11")){
             System.out.println(printMenu());
             input = scanner.nextLine();
 
@@ -143,6 +163,38 @@ public class NutritionTrackerMain {
                 EntryTable entryTable = new EntryTable(entries);
                 System.out.println(entryTable.compareTwoDays(nutrient, dayOne, dayTwo));
                 System.out.println("----------------------------------------------------------");
+            }
+
+            if (input.equals("9")){
+
+            }
+
+            if (input.equals("10")){
+                entries.clear();
+                nutrients.clear();
+                System.out.println("Enter the name of the file to load from:");
+                String f = scanner.nextLine();
+                try {
+                    File file = new File(f);
+                    Scanner scan = new Scanner(file);
+                    while(!scan.nextLine().equals("")){
+                        String fileIn = scan.nextLine();
+                        String[] in = fileIn.split(",");
+                        if (in.length == 5){
+                            Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
+                            Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
+                            entries.add(entry);
+                        }
+                        else if(in.length == 3){
+                            Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
+                            nutrients.add(nutrient);
+                        }
+                    }
+                }
+                catch (FileNotFoundException e){
+                    System.err.println("File could not be found: " + args[1]);
+                    System.exit(1);
+                }
             }
         }
         System.out.println("----------------------------------------------------------");

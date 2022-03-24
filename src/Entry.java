@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class Entry {
+public class Entry implements Comparable<Entry>{
     private int day;
     private Nutrient nutrient;
     private double consumption;
@@ -42,5 +42,10 @@ public class Entry {
             return ("You were successful in meeting your target for " + this.nutrient.getName() + " based on your target goal on day " + this.day);
         }
         return "";
+    }
+
+    @Override
+    public int compareTo(Entry other) {
+        return Integer.compare(this.getDay(), other.getDay());
     }
 }

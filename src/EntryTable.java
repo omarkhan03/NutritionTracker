@@ -15,15 +15,12 @@ public class EntryTable {
         String table = "----------------------------------------------------------\n";
         table = table + "DAY | NUTRIENT | QUANTITY\n";
 
-        Collections.sort(this.inputs, new Comparator<Entry>(){ //compares day value of days to sort list of entries
-            public int compare(Entry ent1, Entry ent2){
-                return Integer.compare(ent1.getDay(), ent2.getDay());
-            }
-        });
+        Collections.sort(this.inputs);
 
         for (Entry entry: this.inputs){ //after sorting the list, it's contents are semi-organized and printed to the console using a for loop
             table = table + entry.getDay() + " | " + entry.getNutrientName() + " | " + entry.getConsumption() + " " + entry.getNutrientUnit() + "\n";
         }
+
         table = table + "----------------------------------------------------------";
         return table;
     }
@@ -61,6 +58,4 @@ public class EntryTable {
         }
         return "No comparison can be made for the given days!";
     }
-
-
 }
