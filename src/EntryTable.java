@@ -59,7 +59,7 @@ public class EntryTable {
                 }
             }
         }
-        return null;
+        return "No comparison can be made for the given days!";
     }
 
 
