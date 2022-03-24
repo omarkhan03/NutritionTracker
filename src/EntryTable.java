@@ -47,15 +47,12 @@ public class EntryTable {
                     if((entry2.getDay() == day2) && (entry2.getNutrientName().equals(nutrient))){
                         if (entry.getConsumption() > entry2.getConsumption()) {
                             double consumptionDifference = entry.getConsumption() - entry2.getConsumption();
-                            System.out.println("Day " + entry.getDay() + "'s " + nutrient + " consumption is greater than " +
-                                    "that of day " + entry2.getDay() + " by " + consumptionDifference + " " + entry.getNutrientUnit());
+                            return "Day " + entry.getDay() + "'s " + nutrient + " consumption is greater than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + " " + entry.getNutrientUnit();
                         } else if (entry.getConsumption() > entry2.getConsumption()) {
                             double consumptionDifference = entry2.getConsumption() - entry.getConsumption();
-                            System.out.println("Day " + entry.getDay() + "'s " + nutrient + " consumption is less than " +
-                                    "that of day " + entry2.getDay() + " by " + consumptionDifference + " units.");
+                            return "Day " + entry.getDay() + "'s " + nutrient + " consumption is less than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + " units.";
                         } else {
-                            System.out.println("Day " + entry.getDay() + "'s " + nutrient + " consumption is equal to " +
-                                    "that of day " + entry2.getDay());
+                            return "Day " + entry.getDay() + "'s " + nutrient + " consumption is equal to " + "that of day " + entry2.getDay();
                         }
                     }
                 }

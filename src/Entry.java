@@ -24,7 +24,7 @@ public class Entry {
     }
 
     public double getConsumption(){
-        return this.getConsumption();
+        return this.consumption;
     }
 
     public String getSurplusDeficiency() {
