@@ -28,16 +28,17 @@ public class EntryTable {
         return table;
     }
 
-    public double getAverage(String nutrient){
-        int count = 0; double avg = 0;
+    public String getAverage(String nutrient){
+        int count = 0; double avg = 0; String unit = "";
         for(Entry entry : inputs){
             if(entry.getNutrientName().equals(nutrient)){
                 count++;
                 avg = avg + entry.getConsumption();
+                unit = entry.getNutrientUnit();
             }
         }
         avg = avg/count;
-        return avg;
+        return "Your average consumption of " + nutrient + " is " + avg + " " + unit;
     }
     //test
     public String compareTwoDays(String nutrient, int day1, int day2){

@@ -18,29 +18,6 @@ public class NutritionTrackerMain {
 
     /**
      * Coded by Omar
-     * Allows user to add or change the daily target (hashmap) for a specific nutrient
-     * @param nutrientTargets is a hashmap of all nutrients that the user has entered and their corresponding targets
-     * @param scanner takes the Scanner object created in the launch function
-     */
-    public static void editNutrientAndTarget(HashMap<String, Integer> nutrientTargets, Scanner scanner){
-        System.out.println("----------------------------------------------------------");
-        System.out.println("Enter the name of the nutrient would you like to add (e.g. protein): ");
-        String name = scanner.nextLine();
-
-        System.out.println("Enter the unit you would like to measure the nutrient with (e.g. grams): ");
-        String unit = scanner.nextLine();
-
-        System.out.println(String.format("Enter the target for the nutrient %s", name));
-        int target = scanner.nextInt();
-
-        Nutrient nutrient = new Nutrient(name, target, unit);
-
-        System.out.println("Added nutrient " + nutrient + " and assigned " + target + " as the target ");
-        System.out.println("----------------------------------------------------------");
-    }
-
-    /**
-     * Coded by Omar
      * Allows user to enter a day, a nutrient and the quantity of nutrient consumed and enters that as an array to the
      * nutrientQuantities arrayList.
      * @param nutrientQuantities is an arrayList containing Arrays with String values for the day, nutrient, and quantity consumed
@@ -139,7 +116,7 @@ public class NutritionTrackerMain {
      */
     public static void viewSuccessfulTargets(HashMap<String, Integer> nutrientTargets, ArrayList<String[]> nutrientQuantities){
         System.out.println("----------------------------------------------------------");
-        System.out.println("The following nutrients matched with their corresponding targets on these days: \n");
+        System.out.println("The following nutrients matched with their corresponding targets on these days: ");
 
         for (String[] consumption : nutrientQuantities){
             if (parseInt(consumption[2]) == (nutrientTargets.get(consumption[1]))){
@@ -248,56 +225,121 @@ public class NutritionTrackerMain {
                 "9)  Exit program";
     }
 
-    /**
-     * Coded by Omar and Carter
-     * Initializes the data structures (HashMap for nutrients are their target consumption values, and ArrayList for
-     * the quantity of nutrient consumed on each day)
-     * Then it prints the menu and prompts the user for which option they would like to select.
-     */
-    public static void launch(){
+    public static void main (String[] args){
         System.out.println("----------------------------------------------------------");
-        HashMap<String, Integer> nutrientTargets = new HashMap<String, Integer>();
-        ArrayList<String[]> nutrientQuantities = new ArrayList<String[]>();
+        ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+        if (args.length == 1){
+
+        }
         String input = "";
         Scanner scanner = new Scanner(System.in);
         while (!input.equals("9")){
-            if (!input.equals("1")){
-                System.out.println(printMenu());
-            }
+            System.out.println(printMenu());
             input = scanner.nextLine();
+
             if (input.equals("1")){
-                editNutrientAndTarget(nutrientTargets, scanner);
+                System.out.println("----------------------------------------------------------");
+                System.out.println("Enter the name of the nutrient would you like to add (e.g. protein): ");
+                String name = scanner.nextLine();
+
+                System.out.println("Enter the unit you would like to measure the nutrient with (e.g. grams): ");
+                String unit = scanner.nextLine();
+
+                System.out.println(String.format("Enter the target for the nutrient %s", name));
+                double target = Double.parseDouble(scanner.nextLine());
+
+                Nutrient nutrient = new Nutrient(name, unit, target);
+
+                System.out.println("Added nutrient " + nutrient + " and assigned " + target + " as the target ");
+                System.out.println("----------------------------------------------------------");
             }
+
             if (input.equals("2")){
-                enterValueToDay(nutrientQuantities, scanner);
+                System.out.println("----------------------------------------------------------");
+                System.out.println("Which day would you like to edit the nutrient consumption of? Enter a positive integer");
+                int day = Integer.parseInt(scanner.nextLine());
+
+                System.out.println("Enter the nutrient you would like to enter a quantity for: ");
+                String nutrient = scanner.nextLine();
+
+                System.out.println(String.format("Enter the consumption value you would like to assign to %s, enter a positive integer: ", nutrient));
+                double quantity = Double.parseDouble(scanner.nextLine());
+
+                for(Nutrient n : nutrients){
+                    if(n.getName().equals(nutrient)){
+                        Entry entry = new Entry(day, n, quantity);
+                    }
+                }
+
+                System.out.println("----------------------------------------------------------");
             }
+
             if (input.equals("3")){
-                viewTable(nutrientQuantities);
+                EntryTable entryTable = new EntryTable(entries);
+                System.out.println(entryTable.createTable());
             }
+
             if (input.equals("4")){
-                viewTargetList(nutrientTargets);
+                NutrientTable nutrientTable = new NutrientTable(nutrients);
+                System.out.println(nutrientTable.createTable());
             }
+
             if (input.equals("5")){
-                viewAverageDeficienciesSurpluses(nutrientQuantities, scanner, nutrientTargets);
+                System.out.println("----------------------------------------------------------");
+                System.out.println("The following nutrient deficiencies and surpluses were found within your entries: ");
+                for(Entry e : entries){
+                    if(!e.getSurplusDeficiency().equals(null)){
+                        System.out.println(e.getSurplusDeficiency());
+                    }
+                }
+                System.out.println("----------------------------------------------------------");
             }
+
             if (input.equals("6")){
-                viewSuccessfulTargets(nutrientTargets, nutrientQuantities);
+                System.out.println("----------------------------------------------------------");
+                System.out.println("The following nutrients matched with their corresponding targets on these days: ");
+                for(Entry e : entries){
+                    if(!e.getSuccessfulTargets().equals(null)){
+                        System.out.println(e.getSuccessfulTargets());
+                    }
+                }
+                System.out.println("----------------------------------------------------------");
             }
+
             if (input.equals("7")){
-                viewCustomAverage(scanner, nutrientQuantities);
+                System.out.println("----------------------------------------------------------");
+                System.out.println("Please enter a nutrient and measuring unit e.g. protein (g).");
+                String nutrient = scanner.nextLine();
+
+                EntryTable entryTable = new EntryTable(entries);
+                System.out.println(entryTable.getAverage(nutrient));
+
+                System.out.println("----------------------------------------------------------");
             }
+
             if (input.equals("8")){
-                compareCustomDays(nutrientQuantities, scanner);
+                System.out.println("----------------------------------------------------------");
+
+                System.out.println("What is the first day you would like to compare? Enter a positive integer: ");
+                int dayOne = Integer.parseInt(scanner.nextLine());
+
+                System.out.println("What is the second day you would like to compare? Enter a positive integer: ");
+                int dayTwo = Integer.parseInt(scanner.nextLine());
+
+                System.out.println("Enter the nutrient whose consumption you'd like to compare: ");
+                String nutrient = scanner.nextLine();
+
+                EntryTable entryTable = new EntryTable(entries);
+                System.out.println(entryTable.compareTwoDays(nutrient, dayOne, dayTwo));
+                System.out.println("----------------------------------------------------------");
             }
+
             else{
                 System.out.println("Input invalid");
             }
         }
         System.out.println("----------------------------------------------------------");
-    }
-
-    public static void main (String[] args){
-        launch();
         System.out.println("Exited, Thank you!");
     }
 }
