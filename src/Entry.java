@@ -23,6 +23,10 @@ public class Entry implements Comparable<Entry>{
         return this.nutrient.getUnit();
     }
 
+    public Double getNutrientTarget(){
+        return this.nutrient.getTarget();
+    }
+
     public double getConsumption(){
         return this.consumption;
     }
@@ -45,7 +49,7 @@ public class Entry implements Comparable<Entry>{
     }
 
     @Override
-    public int compareTo(Entry other) {
+    public int compareTo(Entry other) {//sorts by day, coded with help from https://www.baeldung.com/java-comparator-comparable and https://www.infoworld.com/article/3323403/java-challengers-5-sorting-with-comparable-and-comparator-in-java.html
         return Integer.compare(this.getDay(), other.getDay());
     }
 }
