@@ -29,7 +29,7 @@ public class Entry {
 
     public String getSurplusDeficiency() {
         if(this.consumption > this.nutrient.getTarget()){ //determines if a surplus or deficiency is present on average, or is the user has meets their daily target on a given day
-            return ("You consumed a surplus of " + this.nutrient.getName() + " by " + (this.consumption - this.nutrient.getTarget()) + " units based on your target goal on day " + this.day);
+            return ("You consumed a surplus of " + this.nutrient.getName() + " by " + (this.consumption - this.nutrient.getTarget()) + " " + this.nutrient.getUnit() + " based on your target goal on day " + this.day);
         }
         else if(this.consumption < this.nutrient.getTarget()){
             return ("You were deficient in " + this.nutrient.getName() + " by " + (this.nutrient.getTarget() - this.consumption) + " " + this.nutrient.getUnit() + " based on your target goal on day " + this.day);

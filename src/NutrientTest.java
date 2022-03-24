@@ -268,16 +268,55 @@ class NutrientTest {
         double expected = 5.12345;
         assertEquals(expected, entry.getConsumption());
     }
-/*
+
     @Test
-    void getSurplusDeficiency() {
+    void getSurplusDeficiencyDeficiency() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 90);
 
-        //String expected = "You were deficient in protein by 10 units based on your target goal on day
-
+        String expected = "You were deficient in protein by 10.0 g based on your target goal on day 1";
 
         assertEquals(expected, entry.getSurplusDeficiency());
     }
-*/
+
+    @Test
+    void getSurplusDeficiencySurplus() {
+        Nutrient nutrient = new Nutrient("protein", "g", 100);
+        Entry entry = new Entry(1, nutrient, 110);
+
+        String expected = "You consumed a surplus of protein by 10.0 g based on your target goal on day 1";
+
+        assertEquals(expected, entry.getSurplusDeficiency());
+    }
+
+    @Test
+    void getSurplusDeficiencyDeficiency_2() {
+        Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
+        Entry entry = new Entry(2, nutrient, 2100);
+
+        String expected = "You were deficient in calories by 400.0 kcal based on your target goal on day 2";
+
+        assertEquals(expected, entry.getSurplusDeficiency());
+    }
+
+    @Test
+    void getSurplusDeficiencySurplus_2() {
+        Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
+        Entry entry = new Entry(2, nutrient, 2800);
+
+        String expected = "You consumed a surplus of calories by 300.0 kcal based on your target goal on day 2";
+
+        assertEquals(expected, entry.getSurplusDeficiency());
+    }
+
+    @Test
+    void getSurplusDeficiencyNone() {
+        Nutrient nutrient = new Nutrient("protein", "g", 100);
+        Entry entry = new Entry(1, nutrient, 90);
+
+        String expected = "You were deficient in protein by 10.0 g based on your target goal on day 1";
+
+        assertEquals(expected, entry.getSurplusDeficiency());
+    }
+
 }
