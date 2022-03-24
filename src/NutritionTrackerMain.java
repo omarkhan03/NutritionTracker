@@ -9,8 +9,8 @@ as well as enter the quantity of that nutrient consumed for any day (day 1, day 
 stored data, as well as calculated data described in the menu and javadocs.
 */
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import javax.imageio.IIOException;
+import java.io.*;
 import java.sql.Array;
 import java.util.*;
 
@@ -42,9 +42,9 @@ public class NutritionTrackerMain {
         ArrayList<Entry> entries = new ArrayList<Entry>();
         if (args.length == 1){
             try {
-                File file = new File(args[1]);
+                File file = new File(args[0]);
                 Scanner scanner = new Scanner(file);
-                while(!scanner.nextLine().equals("")){
+                while(scanner.hasNextLine()){
                     String fileIn = scanner.nextLine();
                     String[] in = fileIn.split(",");
                     if (in.length == 5){
@@ -52,10 +52,14 @@ public class NutritionTrackerMain {
                         Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
                         entries.add(entry);
                     }
+                    else if(in.length == 3){
+                        Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
+                        nutrients.add(nutrient);
+                    }
                 }
             }
             catch (FileNotFoundException e){
-                System.err.println("File could not be found: " + args[1]);
+                System.err.println("File could not be found: " + args[0]);
                 System.exit(1);
             }
         }
@@ -65,7 +69,7 @@ public class NutritionTrackerMain {
             System.out.println(printMenu());
             input = scanner.nextLine();
 
-            if (input.equals("1")){
+            if (input.equals("1")){//prompts user for inputs to create nutrient and add it to an array list
                 System.out.println("----------------------------------------------------------");
                 System.out.println("Enter the name of the nutrient would you like to add (e.g. protein): ");
                 String name = scanner.nextLine();
@@ -166,7 +170,41 @@ public class NutritionTrackerMain {
             }
 
             if (input.equals("9")){
+                System.out.println("Give a .csv file name to create or overwrite: ");
+                String f = scanner.nextLine();
+                File file = new File(f);
+                if(!file.exists()){
+                    try{
+                        file.createNewFile();
+                    }
+                    catch(IOException e){
+                        System.err.println("File could not be created: " + f);
+                        System.exit(1);
+                    }
+                }
 
+                if(file.isFile() && file.exists() && file.canWrite()){//Checking file existence, as per instructions from lecture
+                    try{
+                        FileWriter fw = new FileWriter(file);
+                        PrintWriter printWriter = new PrintWriter(fw);
+
+                        for(Entry e : entries){
+                            printWriter.println(e.getDay() + "," + e.getNutrientName() + "," + e.getNutrientUnit() + "," + e.getNutrientTarget() + "," + e.getConsumption());
+                        }
+
+                        for(Nutrient n : nutrients){
+                            printWriter.println(n.getName() + "," + n.getUnit() + "," + n.getTarget());
+                        }
+                        printWriter.flush();
+                    }
+                    catch(IOException e){
+                        System.err.println("File could not be found: " + f);
+                        System.exit(1);
+                    }
+                }
+                else{
+                    System.out.println("Cannot write to file!");
+                }
             }
 
             if (input.equals("10")){
@@ -177,7 +215,8 @@ public class NutritionTrackerMain {
                 try {
                     File file = new File(f);
                     Scanner scan = new Scanner(file);
-                    while(!scan.nextLine().equals("")){
+
+                    while(scan.hasNextLine()){
                         String fileIn = scan.nextLine();
                         String[] in = fileIn.split(",");
                         if (in.length == 5){
@@ -186,13 +225,13 @@ public class NutritionTrackerMain {
                             entries.add(entry);
                         }
                         else if(in.length == 3){
-                            Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
+                            Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
                             nutrients.add(nutrient);
                         }
                     }
                 }
                 catch (FileNotFoundException e){
-                    System.err.println("File could not be found: " + args[1]);
+                    System.err.println("File could not be found: " + f);
                     System.exit(1);
                 }
             }
