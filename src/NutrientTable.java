@@ -22,4 +22,9 @@ public class NutrientTable {
         tableBuilder.append("----------------------------------------------------------");
         return tableBuilder.toString();
     }
+
+    @Override
+    public String toString() {
+        return createTable();
+    }
 }

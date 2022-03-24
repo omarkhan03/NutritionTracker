@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NutrientTest {
@@ -312,11 +314,85 @@ class NutrientTest {
     @Test
     void getSurplusDeficiencyNone() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
-        Entry entry = new Entry(1, nutrient, 90);
+        Entry entry = new Entry(1, nutrient, 100);
 
-        String expected = "You were deficient in protein by 10.0 g based on your target goal on day 1";
+        String expected = "";
 
         assertEquals(expected, entry.getSurplusDeficiency());
+    }
+
+    @Test
+    void getSuccessfulTargets_Protein_Success() {
+        Nutrient nutrient = new Nutrient("protein", "g", 100);
+        Entry entry = new Entry(1, nutrient, 100);
+
+        String expected = "You were successful in meeting your target for protein based on your target goal on day 1";
+
+        assertEquals(expected, entry.getSuccessfulTargets());
+    }
+
+    @Test
+    void getSuccessfulTargets_Calories_Success() {
+        Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
+        Entry entry = new Entry(1, nutrient, 2500);
+
+        String expected = "You were successful in meeting your target for calories based on your target goal on day 1";
+
+        assertEquals(expected, entry.getSuccessfulTargets());
+    }
+
+    @Test
+    void getSuccessfulTargets_Fail_1() {
+        Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
+        Entry entry = new Entry(1, nutrient, 3000);
+
+        String expected = "";
+
+        assertEquals(expected, entry.getSuccessfulTargets());
+    }
+
+    @Test
+    void getSuccessfulTargets_Fail_2() {
+        Nutrient nutrient = new Nutrient("protein", "g", 100);
+        Entry entry = new Entry(1, nutrient, 60);
+
+        String expected = "";
+
+        assertEquals(expected, entry.getSuccessfulTargets());
+    }
+
+    @Test
+    void getSuccessfulTargets_Fail_3() {
+        Nutrient nutrient = new Nutrient("protein", "g", 100);
+        Entry entry = new Entry(1, nutrient, 110);
+
+        String expected = "";
+
+        assertEquals(expected, entry.getSuccessfulTargets());
+    }
+
+    @Test
+    void createNutrientTable() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        ArrayList<Nutrient> nutrientList;
+        nutrientList = new ArrayList<Nutrient>();
+        nutrientList.add(0,protein);
+        nutrientList.add(1,calories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 NUTRIENT | UNIT | TARGET
+                 protein | g | 100.0
+                 calories | kcal | 2500.0
+                 ----------------------------------------------------------""";
+
+        NutrientTable actualTable = new NutrientTable(nutrientList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
     }
 
 }
