@@ -485,4 +485,363 @@ class NutrientTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void getAverage_Protein() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+
+        Entry dayOne = new Entry(1, protein, 100);
+        Entry dayTwo = new Entry(2, protein, 80);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOne);
+        entryList.add(1,dayTwo);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Your average consumption of protein is 90.0 g";
+
+        assertEquals(expected, table.getAverage("protein"));
+    }
+
+    @Test
+    void getAverage_Protein_Mixed() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 100);
+        Entry dayOneCalories = new Entry(2, calories, 2000);
+        Entry dayTwoProtein = new Entry(1, protein, 120);
+        Entry dayTwoCalories = new Entry(2, calories, 3000);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Your average consumption of protein is 110.0 g";
+
+        assertEquals(expected, table.getAverage("protein"));
+    }
+
+    @Test
+    void getAverage_Calories_Mixed() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 100);
+        Entry dayOneCalories = new Entry(2, calories, 2000);
+        Entry dayTwoProtein = new Entry(1, protein, 120);
+        Entry dayTwoCalories = new Entry(2, calories, 3000);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Your average consumption of calories is 2500.0 kcal";
+
+        assertEquals(expected, table.getAverage("calories"));
+    }
+
+    @Test
+    void createEntryTable_1_Nutrient() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        Entry dayOneProtein = new Entry(1, protein, 90);
+        Entry dayTwoProtein = new Entry(2, protein, 110);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayTwoProtein);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 DAY | NUTRIENT | QUANTITY
+                 1 | protein | 90.0 g
+                 2 | protein | 110.0 g
+                 ----------------------------------------------------------""";
+
+        EntryTable actualTable = new EntryTable(entryList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createEntryTable_2_Nutrients() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        Entry dayOneProtein = new Entry(1, protein, 90);
+        Entry dayOneCalories = new Entry(1, calories, 2200);
+        Entry dayTwoProtein = new Entry(2, protein, 110);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 DAY | NUTRIENT | QUANTITY
+                 1 | protein | 90.0 g
+                 1 | calories | 2200.0 kcal
+                 2 | protein | 110.0 g
+                 2 | calories | 2300.0 kcal
+                 ----------------------------------------------------------""";
+
+        EntryTable actualTable = new EntryTable(entryList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createEntryTable_3_Nutrients() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        Entry dayOneProtein = new Entry(1, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+        Entry dayThreeCalories = new Entry(3, fiber, 15);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayTwoCalories);
+        entryList.add(2,dayThreeCalories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 DAY | NUTRIENT | QUANTITY
+                 1 | protein | 90.0 g
+                 2 | calories | 2300.0 kcal
+                 3 | fiber | 15.0 g
+                 ----------------------------------------------------------""";
+
+        EntryTable actualTable = new EntryTable(entryList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createEntryTable_Skipped_Entry() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        Entry dayOneProtein = new Entry(1, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+        Entry dayThreeCalories = new Entry(3, fiber, 15);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayThreeCalories);
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 DAY | NUTRIENT | QUANTITY
+                 1 | protein | 90.0 g
+                 3 | fiber | 15.0 g
+                 ----------------------------------------------------------""";
+
+        EntryTable actualTable = new EntryTable(entryList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createEntryTable_No_Entries() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+        Nutrient fiber = new Nutrient("fiber", "g", 20);
+
+        Entry dayOneProtein = new Entry(1, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+        Entry dayThreeCalories = new Entry(3, fiber, 15);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+
+        String expected =
+                """
+                 ----------------------------------------------------------
+                 DAY | NUTRIENT | QUANTITY
+                 ----------------------------------------------------------""";
+
+        EntryTable actualTable = new EntryTable(entryList);
+        String actual = actualTable.toString();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void compareTwoDays() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2300);
+        Entry dayTwoProtein = new Entry(2, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2200);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+        
+        String expected = "Day 1's protein consumption is greater than that of day 2 by 20.0 g";
+
+        assertEquals(expected, table.compareTwoDays("protein",1,2));
+    }
+
+    @Test
+    void compareTwoDays_Protein() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2300);
+        Entry dayTwoProtein = new Entry(2, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2200);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Day 1's protein consumption is greater than that of day 2 by 20.0 g";
+
+        assertEquals(expected, table.compareTwoDays("protein",1,2));
+    }
+
+    @Test
+    void compareTwoDays_Calories() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2200);
+        Entry dayTwoProtein = new Entry(2, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Day 1's calories consumption is less than that of day 2 by 100.0 kcal";
+
+        assertEquals(expected, table.compareTwoDays("calories",1,2));
+    }
+
+    @Test
+    void compareTwoDays_Calories_Reverse_Order() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2200);
+        Entry dayTwoProtein = new Entry(2, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2300);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Day 2's calories consumption is greater than that of day 1 by 100.0 kcal";
+
+        assertEquals(expected, table.compareTwoDays("calories",2,1));
+    }
+
+    @Test
+    void compareTwoDays_Protein_Reverse_Order() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2300);
+        Entry dayTwoProtein = new Entry(2, protein, 90);
+        Entry dayTwoCalories = new Entry(2, calories, 2200);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Day 2's protein consumption is less than that of day 1 by 20.0 g";
+
+        assertEquals(expected, table.compareTwoDays("protein",2,1));
+    }
+
+    @Test
+    void compareTwoDays_Equal() {
+        Nutrient protein = new Nutrient("protein", "g", 100);
+        Nutrient calories = new Nutrient("calories", "kcal", 2500);
+
+        Entry dayOneProtein = new Entry(1, protein, 110);
+        Entry dayOneCalories = new Entry(1, calories, 2300);
+        Entry dayTwoProtein = new Entry(2, protein, 110);
+        Entry dayTwoCalories = new Entry(2, calories, 2200);
+
+        ArrayList<Entry> entryList;
+        entryList = new ArrayList<Entry>();
+        entryList.add(0,dayOneProtein);
+        entryList.add(1,dayOneCalories);
+        entryList.add(2,dayTwoProtein);
+        entryList.add(3,dayTwoCalories);
+
+        EntryTable table = new EntryTable(entryList);
+
+        String expected = "Day 1's protein consumption is equal to that of day 2";
+
+        assertEquals(expected, table.compareTwoDays("protein",1,2));
+    }
+
 }

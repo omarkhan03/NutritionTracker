@@ -46,9 +46,9 @@ public class EntryTable {
                         if (entry.getConsumption() > entry2.getConsumption()) {
                             double consumptionDifference = entry.getConsumption() - entry2.getConsumption();
                             return "Day " + entry.getDay() + "'s " + nutrient + " consumption is greater than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + " " + entry.getNutrientUnit();
-                        } else if (entry.getConsumption() > entry2.getConsumption()) {
+                        } else if (entry.getConsumption() < entry2.getConsumption()) {
                             double consumptionDifference = entry2.getConsumption() - entry.getConsumption();
-                            return "Day " + entry.getDay() + "'s " + nutrient + " consumption is less than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + entry.getNutrientUnit();
+                            return "Day " + entry.getDay() + "'s " + nutrient + " consumption is less than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + " " + entry.getNutrientUnit();
                         } else {
                             return "Day " + entry.getDay() + "'s " + nutrient + " consumption is equal to " + "that of day " + entry2.getDay();
                         }
@@ -57,5 +57,10 @@ public class EntryTable {
             }
         }
         return "No comparison can be made for the given days!";
+    }
+
+    @Override
+    public String toString() {
+        return createTable();
     }
 }
