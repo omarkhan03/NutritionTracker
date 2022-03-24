@@ -34,13 +34,13 @@ public class Entry {
         else if(this.consumption < this.nutrient.getTarget()){
             return ("You were deficient in " + this.nutrient.getName() + " by " + (this.nutrient.getTarget() - this.consumption) + " " + this.nutrient.getUnit() + " based on your target goal on day " + this.day);
         }
-        return null;
+        return "";
     }
 
     public String getSuccessfulTargets(){
         if(this.consumption == this.nutrient.getTarget()){
             return ("You were successful in meeting your target for " + this.nutrient.getName() + " based on your target goal on day " + this.day);
         }
-        return null;
+        return "";
     }
 }
