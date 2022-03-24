@@ -63,6 +63,11 @@ public class NutritionTrackerMain {
                 System.exit(1);
             }
         }
+        else if(args.length > 1){
+            System.err.println("Invalid Arguments");
+            System.exit(1);
+        }
+
         String input = "";
         Scanner scanner = new Scanner(System.in);
         while (!input.equals("11")){
@@ -196,6 +201,8 @@ public class NutritionTrackerMain {
                             printWriter.println(n.getName() + "," + n.getUnit() + "," + n.getTarget());
                         }
                         printWriter.flush();
+
+                        System.out.println("Save successful!");
                     }
                     catch(IOException e){
                         System.err.println("File could not be found: " + f);
@@ -229,6 +236,8 @@ public class NutritionTrackerMain {
                             nutrients.add(nutrient);
                         }
                     }
+
+                    System.out.println("Load successful!");
                 }
                 catch (FileNotFoundException e){
                     System.err.println("File could not be found: " + f);
