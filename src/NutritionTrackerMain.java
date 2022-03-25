@@ -101,13 +101,13 @@ public class NutritionTrackerMain {
                 System.out.println("Enter the nutrient you would like to enter a quantity for: ");
                 String nutrient = scanner.nextLine();
 
-                System.out.println(String.format("Enter the consumption value you would like to assign to %s, enter a positive integer: ", nutrient));
+                System.out.println(String.format("Enter the consumption value you would like to assign to %s: ", nutrient));
                 double quantity = Double.parseDouble(scanner.nextLine());
                 Entry entry = null;
 
                 for(Nutrient n : nutrients){
                     if(n.getName().equals(nutrient)){
-                        entry = new Entry(day, n, quantity);
+                        entry = new Entry(day, n, quantity);//finds nutrient in list and creates entry
                     }
                 }
 
@@ -128,7 +128,7 @@ public class NutritionTrackerMain {
             if (input.equals("5")){//returns every surplus and deficiency
                 System.out.println("----------------------------------------------------------");
                 System.out.println("The following nutrient deficiencies and surpluses were found within your entries: ");
-                for(Entry e : entries){
+                for(Entry e : entries){//loops for every entry
                     if(!e.getSurplusDeficiency().equals("")){
                         System.out.println(e.getSurplusDeficiency());
                     }
@@ -139,8 +139,8 @@ public class NutritionTrackerMain {
             if (input.equals("6")){//prints every entry that met a target for a given
                 System.out.println("----------------------------------------------------------");
                 System.out.println("The following nutrients matched with their corresponding targets on these days: ");
-                for(Entry e : entries){
-                    if(!e.getSuccessfulTargets().equals("")){
+                for(Entry e : entries){//loops through every entry
+                    if(!e.getSuccessfulTargets().equals("")){//only prints if a non-empty string is printed
                         System.out.println(e.getSuccessfulTargets());
                     }
                 }
@@ -179,7 +179,7 @@ public class NutritionTrackerMain {
                 System.out.println("Give a .csv file name to create or overwrite: ");
                 String f = scanner.nextLine();
                 File file = new File(f);
-                if(!file.exists()){
+                if(!file.exists()){//creates file if it doesn't exit, as per lecture
                     try{
                         file.createNewFile();
                     }
@@ -194,11 +194,11 @@ public class NutritionTrackerMain {
                         FileWriter fw = new FileWriter(file);
                         PrintWriter printWriter = new PrintWriter(fw);
 
-                        for(Entry e : entries){
+                        for(Entry e : entries){//stores entries in a csv format
                             printWriter.println(e.getDay() + "," + e.getNutrientName() + "," + e.getNutrientUnit() + "," + e.getNutrientTarget() + "," + e.getConsumption());
                         }
 
-                        for(Nutrient n : nutrients){
+                        for(Nutrient n : nutrients){//stores nutrients in csv format
                             printWriter.println(n.getName() + "," + n.getUnit() + "," + n.getTarget());
                         }
                         printWriter.flush();
@@ -227,12 +227,12 @@ public class NutritionTrackerMain {
                     while(scan.hasNextLine()){
                         String fileIn = scan.nextLine();
                         String[] in = fileIn.split(",");
-                        if (in.length == 5){
+                        if (in.length == 5){//if there are 5 values in a line, it is stored as an entr
                             Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
                             Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
                             entries.add(entry);
                         }
-                        else if(in.length == 3){
+                        else if(in.length == 3){//if there are 3 values in a csv line, it is stored as a nutrient
                             Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
                             nutrients.add(nutrient);
                         }

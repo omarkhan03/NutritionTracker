@@ -11,6 +11,10 @@ public class EntryTable {
         this.inputs = inputs;
     }
 
+    /**
+     * creates a string representation of a sorted list of entries
+     * @return the table representation as a string
+     */
     public String createTable(){
         String table = "----------------------------------------------------------\n";
         table = table + "DAY | NUTRIENT | QUANTITY\n";
@@ -25,6 +29,11 @@ public class EntryTable {
         return table;
     }
 
+    /**
+     * Gets the average consumption of a specified nutrient  from an arrayList of user entries
+     * @param nutrient is the speicifed nutrient to find an average consumption for
+     * @return the average consumption in a string
+     */
     public String getAverage(String nutrient){
         int count = 0; double avg = 0; String unit = "";
         for(Entry entry : inputs){
@@ -37,12 +46,19 @@ public class EntryTable {
         avg = avg/count;
         return "Your average consumption of " + nutrient + " is " + avg + " " + unit;
     }
-    //test
+
+    /**
+     * Compares the consumption of a nutrient on one day to a consumption of the same nutrient on another day
+     * @param nutrient is a specified nutrient consumption to compare
+     * @param day1 is one of the two days to compare
+     * @param day2 is the other day to compare
+     * @return a string that explains how the two consumptions
+     */
     public String compareTwoDays(String nutrient, int day1, int day2){
         for(Entry entry : inputs){
             if((entry.getDay() == day1) && (entry.getNutrientName().equals(nutrient))){
                 for(Entry entry2 : inputs){
-                    if((entry2.getDay() == day2) && (entry2.getNutrientName().equals(nutrient))){
+                    if((entry2.getDay() == day2) && (entry2.getNutrientName().equals(nutrient))){//result is different depending on the comparison (ie. less than, greater than, or equal to)
                         if (entry.getConsumption() > entry2.getConsumption()) {
                             double consumptionDifference = entry.getConsumption() - entry2.getConsumption();
                             return "Day " + entry.getDay() + "'s " + nutrient + " consumption is greater than " + "that of day " + entry2.getDay() + " by " + consumptionDifference + " " + entry.getNutrientUnit();

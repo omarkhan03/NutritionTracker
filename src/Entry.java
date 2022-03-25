@@ -15,12 +15,12 @@ public class Entry implements Comparable<Entry>{
         return this.day;
     }
 
-    public String getNutrientName(){
+    public String getNutrientName(){//gets nutrient name for entry
         return this.nutrient.getName();
     }
 
     public String getNutrientUnit(){
-        return this.nutrient.getUnit();
+        return this.nutrient.getUnit();//gets nutrient target for entry
     }
 
     public Double getNutrientTarget(){
@@ -31,6 +31,10 @@ public class Entry implements Comparable<Entry>{
         return this.consumption;
     }
 
+    /**
+     * Compares an entries consumption to a nutrient target consumption
+     * @return either a string stating the a surplus or deficiency if one is present, or an empty string if one is not present
+     */
     public String getSurplusDeficiency() {
         if(this.consumption > this.nutrient.getTarget()){ //determines if a surplus or deficiency is present on average, or is the user has meets their daily target on a given day
             return ("You consumed a surplus of " + this.nutrient.getName() + " by " + (this.consumption - this.nutrient.getTarget()) + " " + this.nutrient.getUnit() + " based on your target goal on day " + this.day);
@@ -41,6 +45,10 @@ public class Entry implements Comparable<Entry>{
         return "";
     }
 
+    /**
+     * Checks if a target consumption for a nutrient has been met
+     * @return a string if a target consumption is met, or nothing if not
+     */
     public String getSuccessfulTargets(){
         if(this.consumption == this.nutrient.getTarget()){
             return ("You were successful in meeting your target for " + this.nutrient.getName() + " based on your target goal on day " + this.day);
