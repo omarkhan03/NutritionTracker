@@ -64,14 +64,14 @@ public class NutritionTrackerMain {
                 System.exit(1);
             }
         }
-        else if(args.length > 1){
+        else if(args.length > 1){//exits program if arguments are invalid
             System.err.println("Invalid Arguments");
             System.exit(1);
         }
 
         String input = "";
         Scanner scanner = new Scanner(System.in);
-        while (!input.equals("11")){
+        while (!input.equals("11")){//loops program until exit option is selected
             System.out.println(printMenu());
             input = scanner.nextLine();
 
@@ -93,7 +93,7 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("2")){
+            if (input.equals("2")){//prompts user for inputs to create day entry and add it to an array list
                 System.out.println("----------------------------------------------------------");
                 System.out.println("Which day would you like to edit the nutrient consumption of? Enter a positive integer");
                 int day = Integer.parseInt(scanner.nextLine());
@@ -115,17 +115,17 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("3")){
+            if (input.equals("3")){//prints a table of all entries to the console
                 EntryTable entryTable = new EntryTable(entries);
                 System.out.println(entryTable.createTable());
             }
 
-            if (input.equals("4")){
+            if (input.equals("4")){//prints a
                 NutrientTable nutrientTable = new NutrientTable(nutrients);
                 System.out.println(nutrientTable.createTable());
             }
 
-            if (input.equals("5")){
+            if (input.equals("5")){//returns every surplus and deficiency
                 System.out.println("----------------------------------------------------------");
                 System.out.println("The following nutrient deficiencies and surpluses were found within your entries: ");
                 for(Entry e : entries){
@@ -136,7 +136,7 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("6")){
+            if (input.equals("6")){//prints every entry that met a target for a given
                 System.out.println("----------------------------------------------------------");
                 System.out.println("The following nutrients matched with their corresponding targets on these days: ");
                 for(Entry e : entries){
@@ -147,7 +147,7 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("7")){
+            if (input.equals("7")){//prints the average consumption of a given nutrient
                 System.out.println("----------------------------------------------------------");
                 System.out.println("Please enter the name of the nutrient you would like to view data for: ");
                 String nutrient = scanner.nextLine();
@@ -158,7 +158,7 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("8")){
+            if (input.equals("8")){//compares the consumptions of a nutrient between two days
                 System.out.println("----------------------------------------------------------");
 
                 System.out.println("What is the first day you would like to compare? Enter a positive integer: ");
@@ -175,7 +175,7 @@ public class NutritionTrackerMain {
                 System.out.println("----------------------------------------------------------");
             }
 
-            if (input.equals("9")){
+            if (input.equals("9")){//saves user inputs to a file, which can be loaded
                 System.out.println("Give a .csv file name to create or overwrite: ");
                 String f = scanner.nextLine();
                 File file = new File(f);
@@ -215,7 +215,7 @@ public class NutritionTrackerMain {
                 }
             }
 
-            if (input.equals("10")){
+            if (input.equals("10")){//loads from a file
                 entries.clear();
                 nutrients.clear();
                 System.out.println("Enter the name of the file to load from:");
