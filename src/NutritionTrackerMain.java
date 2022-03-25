@@ -17,7 +17,7 @@ import java.util.*;
 import static java.lang.Integer.parseInt;
 
 public class NutritionTrackerMain {
-    public static String printMenu(){
+    public static String printMenu(){//prints menu to console
         return "Select one of the following options:\n\n" +
                 "Edit data\n" +
                 "1)  Edit nutrient and daily target\n" +
@@ -40,7 +40,7 @@ public class NutritionTrackerMain {
         System.out.println("----------------------------------------------------------");
         ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
         ArrayList<Entry> entries = new ArrayList<Entry>();
-        if (args.length == 1){
+        if (args.length == 1){//if a file name is given, load from it
             try {
                 File file = new File(args[0]);
                 Scanner scanner = new Scanner(file);
@@ -57,6 +57,7 @@ public class NutritionTrackerMain {
                         nutrients.add(nutrient);
                     }
                 }
+                System.out.println("Successfully loaded from file");
             }
             catch (FileNotFoundException e){
                 System.err.println("File could not be found: " + args[0]);
