@@ -33,7 +33,7 @@ public class Entry implements Comparable<Entry>{
 
     /**
      * Compares an entries consumption to a nutrient target consumption
-     * @return either a string stating a surplus or deficiency if one is present, or an empty string if one is not present
+     * @return either a string stating the a surplus or deficiency if one is present, or an empty string if one is not present
      */
     public String getSurplusDeficiency() {
         if(this.consumption > this.nutrient.getTarget()){ //determines if a surplus or deficiency is present on average, or is the user has meets their daily target on a given day

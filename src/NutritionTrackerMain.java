@@ -76,7 +76,6 @@ public class NutritionTrackerMain {
             input = scanner.nextLine();
 
             if (input.equals("1")){//prompts user for inputs to create nutrient and add it to an array list
-                double target = 0;
                 System.out.println("----------------------------------------------------------");
                 System.out.println("Enter the name of the nutrient would you like to add (e.g. protein): ");
                 String name = scanner.nextLine();
@@ -85,13 +84,7 @@ public class NutritionTrackerMain {
                 String unit = scanner.nextLine();
 
                 System.out.println(String.format("Enter the target for the nutrient %s", name));
-                try{
-                    target = Double.parseDouble(scanner.nextLine());
-                }
-                catch(Exception e){
-                    System.err.println("Invalid input!");
-                    System.exit(1);
-                }
+                double target = Double.parseDouble(scanner.nextLine());
 
                 Nutrient nutrient = new Nutrient(name, unit, target);
                 nutrients.add(nutrient);
@@ -101,28 +94,15 @@ public class NutritionTrackerMain {
             }
 
             if (input.equals("2")){//prompts user for inputs to create day entry and add it to an array list
-                int day = 0; double quantity = 0;
                 System.out.println("----------------------------------------------------------");
                 System.out.println("Which day would you like to edit the nutrient consumption of? Enter a positive integer");
-                try{
-                    day = Integer.parseInt(scanner.nextLine());
-                }
-                catch(Exception e){
-                    System.err.println("Invalid input!");
-                    System.exit(1);
-                }
+                int day = Integer.parseInt(scanner.nextLine());
 
                 System.out.println("Enter the nutrient you would like to enter a quantity for: ");
                 String nutrient = scanner.nextLine();
 
                 System.out.println(String.format("Enter the consumption value you would like to assign to %s: ", nutrient));
-                try {
-                    quantity = Double.parseDouble(scanner.nextLine());
-                }
-                catch(Exception e){
-                    System.err.println("Invalid input!");
-                    System.exit(1);
-                }
+                double quantity = Double.parseDouble(scanner.nextLine());
                 Entry entry = null;
 
                 for(Nutrient n : nutrients){
@@ -131,15 +111,7 @@ public class NutritionTrackerMain {
                     }
                 }
 
-                if (!(entry == null))
-                {
-                    entries.add(entry);
-                }
-                else{
-                    System.err.println("Nutrient not found!");
-                    System.exit(1);
-                }
-
+                entries.add(entry);
                 System.out.println("----------------------------------------------------------");
             }
 
@@ -188,25 +160,12 @@ public class NutritionTrackerMain {
 
             if (input.equals("8")){//compares the consumptions of a nutrient between two days
                 System.out.println("----------------------------------------------------------");
-                int dayOne = 0; int dayTwo = 0;
-                System.out.println("What is the first day you would like to compare? Enter a positive integer: ");
-                try{
-                    dayOne = Integer.parseInt(scanner.nextLine());
-                }
-                catch(Exception e){
-                    System.err.println("Invalid input");
-                    System.exit(1);
-                }
 
+                System.out.println("What is the first day you would like to compare? Enter a positive integer: ");
+                int dayOne = Integer.parseInt(scanner.nextLine());
 
                 System.out.println("What is the second day you would like to compare? Enter a positive integer: ");
-                try{
-                    dayTwo = Integer.parseInt(scanner.nextLine());
-                }
-                catch(Exception e){
-                    System.err.println("Invalid input");
-                    System.exit(1);
-                }
+                int dayTwo = Integer.parseInt(scanner.nextLine());
 
                 System.out.println("Enter the nutrient whose consumption you'd like to compare: ");
                 String nutrient = scanner.nextLine();
