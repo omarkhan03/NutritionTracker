@@ -2,7 +2,6 @@ package com.example.cpsc233projectdemo3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -11,15 +10,13 @@ import javafx.stage.FileChooser;
 import utils.Entry;
 import utils.EntryTable;
 import utils.Nutrient;
+import utils.NutrientTable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.imageio.IIOException;
 import java.io.*;
-import java.sql.Array;
-import java.util.*;
 
 public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSED
     public static ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
@@ -223,5 +220,14 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     public void viewEntriesAsTable() {
         EntryTable entryTable = new EntryTable(entries);
         detailView.setText(entryTable.createTable());
+        left.setTextFill(Color.color(0,1,0));
+        left.setText("Created entry table!");
+    }
+
+    public void viewNutrientsAsTable() {
+        NutrientTable nutrientTable = new NutrientTable(nutrients);
+        detailView.setText(nutrientTable.createTable());
+        left.setTextFill(Color.color(0,1,0));
+        left.setText("Created nutrient table!");
     }
 }
