@@ -50,31 +50,36 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     @FXML
     public void loadFile() {
         File file = fileChooser.showOpenDialog(null);
-        entries.clear();
-        nutrients.clear();
-        try {
-            Scanner scan = new Scanner(file);
-            while(scan.hasNextLine()){
-                String fileIn = scan.nextLine();
-                String[] in = fileIn.split(",");
-                if (in.length == 5){//if there are 5 values in a line, it is stored as an entr
-                    Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
-                    Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
-                    entries.add(entry);
+        if (file != null) {
+            entries.clear();
+            nutrients.clear();
+            try {
+                Scanner scan = new Scanner(file);
+                while(scan.hasNextLine()){
+                    String fileIn = scan.nextLine();
+                    String[] in = fileIn.split(",");
+                    if (in.length == 5){//if there are 5 values in a line, it is stored as an entr
+                        Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
+                        Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
+                        entries.add(entry);
+                    }
+                    else if(in.length == 3){//if there are 3 values in a csv line, it is stored as a nutrient
+                        Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
+                        nutrients.add(nutrient);
+                    }
                 }
-                else if(in.length == 3){//if there are 3 values in a csv line, it is stored as a nutrient
-                    Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
-                    nutrients.add(nutrient);
-                }
+                left.setTextFill(Color.color(0,1,0));
+                left.setText("Loaded World " + file.getName());
+                currentFile = file;
             }
-            left.setTextFill(Color.color(0,1,0));
-            left.setText("Loaded World " + file.getName());
-            currentFile = file;
-        }
-        catch (FileNotFoundException e){
+            catch (FileNotFoundException e){
+                left.setTextFill(Color.color(1,0,0));
+                left.setText("File could not be found: " + file.getName());
+                System.exit(1);
+            }
+        } else {
             left.setTextFill(Color.color(1,0,0));
-            left.setText("File could not be found: " + file.getName());
-            System.exit(1);
+            left.setText("Please select a file to load");
         }
     }
 
@@ -122,8 +127,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
 
     @FXML
     public void saveFileAs() {
-        File file = fileChooser.showOpenDialog(null);
-        if(!file.exists()){//creates file if it doesn't exit, as per lecture
+        File file = fileChooser.showSaveDialog(null);
+        if(file != null && !file.exists()){//creates file if it doesn't exit, as per lecture
             try{
                 file.createNewFile();
             }
@@ -133,7 +138,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             }
         }
 
-        if(file.isFile() && file.exists() && file.canWrite()){//Checking file existence, as per instructions from lecture
+        if(file != null && file.isFile() && file.exists() && file.canWrite()){//Checking file existence, as per instructions from lecture
             try{
                 FileWriter fw = new FileWriter(file);
                 PrintWriter printWriter = new PrintWriter(fw);
