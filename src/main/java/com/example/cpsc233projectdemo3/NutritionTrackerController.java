@@ -2,10 +2,7 @@ package com.example.cpsc233projectdemo3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import utils.Entry;
@@ -22,6 +19,9 @@ import java.io.*;
 public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSED
     public static ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
     public static ArrayList<Entry> entries = new ArrayList<Entry>();
+    @FXML
+    public TextField enterNutrientToAverage;
+    @FXML
     private File currentFile;
     @FXML
     private Label left;
@@ -261,4 +261,16 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         detailView.setText(s);
     }
 
+    @FXML
+    public void showAverage() {
+        String nutrient = enterNutrientToAverage.getText();
+        EntryTable entryTable = new EntryTable(entries);
+            String averageMessage = entryTable.getAverage(nutrient);
+            if (averageMessage != null) {
+                detailView.setText(averageMessage);
+            } else {
+                left.setTextFill(Color.color(1,0,0));
+                left.setText("Please enter a valid nutrient name to find average");
+            }
+    }
 }

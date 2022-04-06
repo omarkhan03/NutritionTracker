@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static java.lang.Double.isNaN;
 import static java.lang.Integer.parseInt;
 
 public class EntryTable {
@@ -46,7 +47,12 @@ public class EntryTable {
             }
         }
         avg = avg/count;
-        return "Your average consumption of " + nutrient + " is " + avg + " " + unit;
+
+        if (isNaN(avg)) {
+            return null;
+        } else {
+            return "Your average consumption of " + nutrient + " is " + avg + " " + unit;
+        }
     }
 
     /**
