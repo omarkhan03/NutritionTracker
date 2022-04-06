@@ -2,11 +2,14 @@ package com.example.cpsc233projectdemo3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import utils.Entry;
+import utils.EntryTable;
 import utils.Nutrient;
 
 import java.io.File;
@@ -38,6 +41,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     private TextField nutrientTarget;
     @FXML
     private TextField nutrientUnit;
+    @FXML
+    private TextArea detailView;
 
     @FXML
     public void initialize(){
@@ -191,7 +196,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         try {
             Entry entry = null;
             for(Nutrient n : nutrients) {
-                if(n.getName().equals(entryNutrient)) {
+                if(n.getName().equals(entryNutrient.getText())) {
                     entry = new Entry(Integer.parseInt(entryDay.getText()), n, Double.parseDouble(entryConsumption.getText()));//finds nutrient in list and creates entry
                 }
             }
@@ -212,5 +217,11 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             left.setTextFill(Color.color(1,0,0));
             left.setText("Invalid values given! Ensure the day is an integer and the consumption is a number!");
         }
+    }
+
+    @FXML
+    public void onViewEntriesTableClick() {
+        EntryTable entryTable = new EntryTable(entries);
+        detailView.setText(entryTable.createTable());
     }
 }
