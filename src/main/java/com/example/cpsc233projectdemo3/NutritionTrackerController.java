@@ -50,12 +50,18 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     @FXML
     private TextArea detailView;
 
+    /**
+     * Initializes status bar and filechooser
+     */
     @FXML
     public void initialize(){
         left.setText("Program Status");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Comma Separated Value Files (.csv)", "*.csv"));//Reused from assignment 3
     }
 
+    /**
+     * Opens a fileChooser and allows user to load the data from a valid text file into the program
+     */
     @FXML
     public void loadFile() {
         File file = fileChooser.showOpenDialog(null);
@@ -92,6 +98,9 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         }
     }
 
+    /**
+     * Saves program data as a text file, without giving user the option to name it or select its location
+     */
     @FXML
     public void saveFile() {
         File file = currentFile;
@@ -134,6 +143,9 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         }
     }
 
+    /**
+     * Saves program data as a text file, and gives user option to name it and select its location
+     */
     @FXML
     public void saveFileAs() {
         File file = fileChooser.showSaveDialog(null);
@@ -177,11 +189,17 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         }
     }
 
+    /**
+     * Quits program
+     */
     @FXML
     public void quitProgram() {
         System.exit(1);
     }
 
+    /**
+     * Creates a popup information window
+     */
     @FXML
     public void aboutInfo() {
         Alert about = new Alert(Alert.AlertType.INFORMATION, "Created by Omar Khan and Carter Tam");
@@ -190,6 +208,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
 
     /**
      * Event handler for add nutrient button
+     * User inputs nutrient name, unit, and target consumption
+     * This uses those parameters to create a nutrient
      */
     @FXML
     public void addNutrient() {
