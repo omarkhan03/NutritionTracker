@@ -60,7 +60,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     }
 
     /**
-     * Opens a fileChooser and allows user to load the data from a valid text file into the program
+     * Opens a fileChooser and allows user to load the data from a valid csv file into the program
      */
     @FXML
     public void loadFile() {
@@ -99,7 +99,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     }
 
     /**
-     * Saves program data as a text file, without giving user the option to name it or select its location
+     * Saves program data as a csv file, without giving user the option to name it or select its location
      */
     @FXML
     public void saveFile() {
@@ -144,7 +144,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     }
 
     /**
-     * Saves program data as a text file, and gives user option to name it and select its location
+     * Saves program data as a csv file, and gives user option to name it and select its location
      */
     @FXML
     public void saveFileAs() {
