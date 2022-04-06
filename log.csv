@@ -1,2 +1,5 @@
-1,p,g,2.0,2.0
-p,g,2.0
+1,protein,g,100.0,100.0
+1,calories,kCal,2500.0,2300.0
+2,protein,g,100.0,90.0
+protein,g,100.0
+calories,kCal,2500.0
