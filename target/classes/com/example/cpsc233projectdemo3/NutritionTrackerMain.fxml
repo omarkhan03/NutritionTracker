@@ -48,14 +48,14 @@
                                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                             </textFill>
                         </Label>
-                  <TextField fx:id="entryDay" layoutX="54.0" layoutY="72.0" promptText="Entry Day # (ie. 1)" />
-                  <TextField fx:id="entryNutrient" layoutX="54.0" layoutY="97.0" promptText="Entry Nutrient Name" />
-                  <TextField fx:id="entryConsumption" layoutX="54.0" layoutY="122.0" promptText="Entry Consumption " />
-                  <Button layoutX="95.0" layoutY="154.0" mnemonicParsing="false" onAction="#addEntry" text="Add Entry" />
-                  <Button layoutX="87.0" layoutY="280.0" mnemonicParsing="false" text="Add Nutrient" />
-                  <TextField layoutX="54.0" layoutY="199.0" promptText="Nutrient Name " />
-                  <TextField layoutX="54.0" layoutY="224.0" promptText="Nutrient Unit (ie. g)" />
-                  <TextField layoutX="54.0" layoutY="249.0" promptText="Nutrient Target" />
+                  <TextField fx:id="entryDay" layoutX="54.0" layoutY="199.0" promptText="Entry Day # (ie. 1)" />
+                  <TextField fx:id="entryNutrient" layoutX="54.0" layoutY="224.0" promptText="Entry Nutrient Name" />
+                  <TextField fx:id="entryConsumption" layoutX="54.0" layoutY="249.0" promptText="Entry Consumption " />
+                  <Button layoutX="96.0" layoutY="287.0" mnemonicParsing="false" onAction="#addEntry" text="Add Entry" />
+                  <Button layoutX="88.0" layoutY="133.0" mnemonicParsing="false" text="Add Nutrient" />
+                  <TextField fx:id="nutrientName" layoutX="54.0" layoutY="47.0" prefHeight="16.0" prefWidth="149.0" promptText="Nutrient Name " />
+                  <TextField fx:id="nutrientUnit" layoutX="54.0" layoutY="72.0" promptText="Nutrient Unit (ie. g)" />
+                  <TextField fx:id="nutrientTarget" layoutX="54.0" layoutY="97.0" promptText="Nutrient Target" />
                   <Label alignment="CENTER" layoutX="14.0" layoutY="338.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="View Data" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" fx:id="x11" />
