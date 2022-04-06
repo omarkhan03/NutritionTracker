@@ -77,7 +77,7 @@
                         <Button layoutX="84.0" layoutY="105.0" mnemonicParsing="false" onAction="#viewSucessfulTargets" text="View Successful Targets" />
                         <Button fx:id="averageButton" layoutX="125.0" layoutY="249.0" mnemonicParsing="false" onAction="#showAverage" text="Average" />
                         <TextField fx:id="enterNutrientToAverage" layoutX="81.0" layoutY="215.0" promptText="Enter Nutrient" />
-                        <TextField layoutX="80.0" layoutY="333.0" promptText="Day 1" />
+                        <TextField fx:id="dayOne" layoutX="81.0" layoutY="359.0" prefHeight="25.0" prefWidth="69.0" promptText="Day 1" />
                         <Label alignment="CENTER" layoutX="14.0" layoutY="173.0" style="&#10;" text="Average Consumption" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" fx:id="x12" />
@@ -86,7 +86,7 @@
                               <Color red="0.624" green="0.624" blue="0.624" fx:id="x22" />
                            </textFill>
                         </Label>
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="289.0" style="&#10;" text="Compare Two Days" textAlignment="CENTER" wrapText="false">
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="294.0" style="&#10;" text="Compare Two Days" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" fx:id="x121" />
                            </font>
@@ -94,8 +94,9 @@
                               <Color red="0.624" green="0.624" blue="0.624" fx:id="x221" />
                            </textFill>
                         </Label>
-                        <TextField layoutX="80.0" layoutY="358.0" promptText="Day 2" />
-                        <Button layoutX="122.0" layoutY="389.0" mnemonicParsing="false" text="Compare" />
+                        <TextField fx:id="dayTwo" layoutX="151.0" layoutY="359.0" prefHeight="25.0" prefWidth="80.0" promptText="Day 2" />
+                        <Button layoutX="122.0" layoutY="392.0" mnemonicParsing="false" onAction="#compareDays" text="Compare" />
+                        <TextField fx:id="enterNutrientToCompare" layoutX="81.0" layoutY="333.0" promptText="Enter Nutrient" />
                             </children>
                         </AnchorPane>
                     </content>

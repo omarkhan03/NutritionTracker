@@ -22,6 +22,14 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     @FXML
     public TextField enterNutrientToAverage;
     @FXML
+    public Button averageButton;
+    @FXML
+    public TextField dayOne;
+    @FXML
+    public TextField dayTwo;
+    @FXML
+    public TextField enterNutrientToCompare;
+    @FXML
     private File currentFile;
     @FXML
     private Label left;
@@ -248,6 +256,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             }
         }
         detailView.setText(s);
+        left.setTextFill(Color.color(0,1,0));
+        left.setText("Viewed defiencies and surpluses!");
     }
 
     @FXML
@@ -259,6 +269,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             }
         }
         detailView.setText(s);
+        left.setTextFill(Color.color(0,1,0));
+        left.setText("Viewed successful targets!");
     }
 
     @FXML
@@ -268,9 +280,42 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             String averageMessage = entryTable.getAverage(nutrient);
             if (averageMessage != null) {
                 detailView.setText(averageMessage);
+                left.setTextFill(Color.color(0,1,0));
+                left.setText("Found average!");
             } else {
                 left.setTextFill(Color.color(1,0,0));
                 left.setText("Please enter a valid nutrient name to find average");
             }
+    }
+
+    @FXML
+    public void compareDays() {
+        String nutrient = enterNutrientToCompare.getText();
+        EntryTable entryTable = new EntryTable(entries);
+        try {
+            int day1 = Integer.parseInt(dayOne.getText());
+
+            try {
+                int day2 = Integer.parseInt(dayTwo.getText());
+
+                try {
+                    String compareMessage = entryTable.compareTwoDays(nutrient, day1, day2);
+                    detailView.setText(compareMessage);
+                    left.setTextFill(Color.color(0,1,0));
+                    left.setText("Compared days!");
+                } catch (Exception e) {
+                    left.setTextFill(Color.color(1,0,0));
+                    left.setText("Error in day comparison!");
+                }
+
+            } catch (Exception e) {
+                left.setTextFill(Color.color(1,0,0));
+                left.setText("Please enter an integer for day two");
+            }
+
+        } catch (Exception e) {
+            left.setTextFill(Color.color(1,0,0));
+            left.setText("Please enter an integer for day one");
+        }
     }
 }
