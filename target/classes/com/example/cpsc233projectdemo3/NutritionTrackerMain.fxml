@@ -73,8 +73,8 @@
                         <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="548.0" prefWidth="309.0">
                             <children>
                                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Special Options" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <Button layoutX="39.0" layoutY="66.0" mnemonicParsing="false" text="View Nutrient Deficiencies and Surpluses" />
-                        <Button layoutX="84.0" layoutY="105.0" mnemonicParsing="false" text="View Successful Targets" />
+                        <Button layoutX="39.0" layoutY="66.0" mnemonicParsing="false" onAction="#viewDeficienciesSurplus" text="View Nutrient Deficiencies and Surpluses" />
+                        <Button layoutX="84.0" layoutY="105.0" mnemonicParsing="false" onAction="#viewSucessfultargets" text="View Successful Targets" />
                         <Button layoutX="125.0" layoutY="249.0" mnemonicParsing="false" text="Average" />
                         <TextField layoutX="81.0" layoutY="215.0" promptText="Enter Nutrient" />
                         <TextField layoutX="80.0" layoutY="333.0" promptText="Day 1" />

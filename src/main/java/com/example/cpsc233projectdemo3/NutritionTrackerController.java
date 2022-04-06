@@ -52,7 +52,6 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         File file = fileChooser.showOpenDialog(null);
         entries.clear();
         nutrients.clear();
-        System.out.println("Enter the name of the file to load from:");
         try {
             Scanner scan = new Scanner(file);
             while(scan.hasNextLine()){
@@ -231,4 +230,27 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setTextFill(Color.color(0,1,0));
         left.setText("Created nutrient table!");
     }
+
+    @FXML
+    public void viewDeficienciesSurplus() {
+        String s = "The following nutrient deficiencies and surpluses were found within your entries: \n";
+        for(Entry e : entries){//loops for every entry
+            if(!e.getSurplusDeficiency().equals("")){
+                s = s + e.getSurplusDeficiency() +"\n";
+            }
+        }
+        detailView.setText(s);
+    }
+
+    @FXML
+    public void viewSucessfulTargets() {
+        String s = "The following nutrients matched with their corresponding targets on these days: \n";
+        for(Entry e : entries){//loops through every entry
+            if(!e.getSuccessfulTargets().equals("")){//only prints if a non-empty string is printed
+                s = s + e.getSuccessfulTargets() + "\n";
+            }
+        }
+        detailView.setText(s);
+    }
+
 }
