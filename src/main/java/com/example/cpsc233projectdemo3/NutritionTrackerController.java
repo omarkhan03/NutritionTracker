@@ -2,6 +2,7 @@ package com.example.cpsc233projectdemo3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -175,6 +176,8 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
 
     @FXML
     public void aboutInfo() {
+        Alert about = new Alert(Alert.AlertType.INFORMATION, "Created by Omar Khan and Carter Tam");
+        about.show();
     }
 
     @FXML
