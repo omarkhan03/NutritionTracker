@@ -224,6 +224,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setText("Created entry table!");
     }
 
+    @FXML
     public void viewNutrientsAsTable() {
         NutrientTable nutrientTable = new NutrientTable(nutrients);
         detailView.setText(nutrientTable.createTable());
