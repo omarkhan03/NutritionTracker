@@ -220,7 +220,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
     }
 
     @FXML
-    public void onViewEntriesTableClick() {
+    public void viewEntriesAsTable() {
         EntryTable entryTable = new EntryTable(entries);
         detailView.setText(entryTable.createTable());
     }
