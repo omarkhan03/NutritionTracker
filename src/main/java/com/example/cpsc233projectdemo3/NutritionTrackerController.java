@@ -188,6 +188,9 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         about.show();
     }
 
+    /**
+     * Event handler for add nutrient button
+     */
     @FXML
     public void addNutrient() {
         try {
@@ -203,16 +206,24 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         }
     }
 
+    /**
+     * Event handler for add entry button
+     * User inputs day, nutrient name, and consumption value
+     * This uses those parameters to create an entry
+     */
     @FXML
     public void addEntry() {
         try {
             Entry entry = null;
+            // Loops through every nutrient
             for(Nutrient n : nutrients) {
+                // If nutrient name matches with user input, it creates the entry
                 if(n.getName().equals(entryNutrient.getText())) {
                     entry = new Entry(Integer.parseInt(entryDay.getText()), n, Double.parseDouble(entryConsumption.getText()));//finds nutrient in list and creates entry
                 }
             }
 
+            // If entry is null, that means the nutrient inputted by user does not exist
             if (!(entry == null)) {
                 entries.add(entry);
                 left.setTextFill(Color.color(0,1,0));
@@ -231,6 +242,10 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         }
     }
 
+    /**
+     * Event handler for view entries as table button
+     * Puts an entry table in detailsView, which contains every entry stored
+     */
     @FXML
     public void viewEntriesAsTable() {
         EntryTable entryTable = new EntryTable(entries);
@@ -239,6 +254,10 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setText("Created entry table!");
     }
 
+    /**
+     * Event handler for view nutrients as table button
+     * Puts a nutrient table in detailsView, which contains every nutrient stored
+     */
     @FXML
     public void viewNutrientsAsTable() {
         NutrientTable nutrientTable = new NutrientTable(nutrients);
@@ -247,6 +266,10 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setText("Created nutrient table!");
     }
 
+    /**
+     * Event handler for view deficiencies and surpluses button
+     * It shows every entry that had a deficiency or surplus in detailsView
+     */
     @FXML
     public void viewDeficienciesSurplus() {
         String s = "The following nutrient deficiencies and surpluses were found within your entries: \n";
@@ -260,6 +283,10 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setText("Viewed defiencies and surpluses!");
     }
 
+    /**
+     * Event handler for view successful targets button
+     * It shows every entry that met its nutrient target in detailsView
+     */
     @FXML
     public void viewSucessfulTargets() {
         String s = "The following nutrients matched with their corresponding targets on these days: \n";
@@ -273,11 +300,18 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         left.setText("Viewed successful targets!");
     }
 
+    /**
+     * Event handler for average button
+     * User enters a nutrient name to find the average consumption of
+     * Sets text of detailsView to the average message
+     */
     @FXML
     public void showAverage() {
         String nutrient = enterNutrientToAverage.getText();
         EntryTable entryTable = new EntryTable(entries);
-            String averageMessage = entryTable.getAverage(nutrient);
+        String averageMessage = entryTable.getAverage(nutrient);
+
+            // If message is null, that means that there are exists no entries for the nutrient inputted by user
             if (averageMessage != null) {
                 detailView.setText(averageMessage);
                 left.setTextFill(Color.color(0,1,0));
@@ -288,10 +322,17 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
             }
     }
 
+    /**
+     * Event handler for compare button
+     * User enters nutrient name and 2 integers for days to compare
+     * Sets text of detailsView to the comparison message
+     */
     @FXML
     public void compareDays() {
         String nutrient = enterNutrientToCompare.getText();
         EntryTable entryTable = new EntryTable(entries);
+
+        // Try blocks are for making sure that user inputs for days are valid integers.
         try {
             int day1 = Integer.parseInt(dayOne.getText());
 
@@ -303,6 +344,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
                     detailView.setText(compareMessage);
                     left.setTextFill(Color.color(0,1,0));
                     left.setText("Compared days!");
+
                 } catch (Exception e) {
                     left.setTextFill(Color.color(1,0,0));
                     left.setText("Error in day comparison!");
