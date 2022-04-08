@@ -1,5 +1,16 @@
 package com.example.cpsc233projectdemo3;
 
+/*
+Course: CPSC 233
+Names: Carter Tam and Omar Khan
+Date: Feb 28, 2022
+Tutorial: T06 (Amirhossein)
+
+Description: This is a nutrition tracker. Users will be able to enter nutrients and their target consumption goals,
+as well as enter the quantity of that nutrient consumed for any day (day 1, day 2, etc.). They will be able to view
+stored data, as well as calculated data described in the menu and javadocs.
+*/
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
