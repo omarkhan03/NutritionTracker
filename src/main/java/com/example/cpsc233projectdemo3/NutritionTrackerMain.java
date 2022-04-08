@@ -21,6 +21,7 @@ public class NutritionTrackerMain extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        stage.setTitle("Nutrition Tracker Demo 3 by Carter Tam and Omar Khan");
         stage.show();
     }
 
