@@ -32,20 +32,20 @@ public class NutritionTrackerMain extends Application {
                 Scanner scanner = new Scanner(file);
                 while(scanner.hasNextLine()){
                     String fileIn = scanner.nextLine();
-                    String[] in = fileIn.split(",");
-                    if (in.length == 5){
+                    String[] in = fileIn.split(",");//splits line into an array
+                    if (in.length == 5){// if the length of the line is 5, store it as an entry
                         Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
                         Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
                         entries.add(entry);
                     }
-                    else if(in.length == 3){
+                    else if(in.length == 3){//if the length of the line is 3, store it as a nutrient
                         Nutrient nutrient = new Nutrient(in[0], in[1], Double.parseDouble(in[2]));
                         nutrients.add(nutrient);
                     }
                 }
                 System.out.println("Successfully loaded from file");
             }
-            catch (FileNotFoundException e){
+            catch (FileNotFoundException e){//handles case when file read from argument doesn't exist
                 System.out.println("File could not be found: " + args[0]);
                 System.exit(1);
             }

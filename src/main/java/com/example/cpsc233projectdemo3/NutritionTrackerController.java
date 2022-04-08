@@ -213,14 +213,14 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
      */
     @FXML
     public void addNutrient() {
-        try {
+        try {//try to create and store it to an arrayList
             Nutrient nutrient = new Nutrient(nutrientName.getText(), nutrientUnit.getText(), Double.parseDouble(nutrientTarget.getText()));
             nutrients.add(nutrient);
             left.setTextFill(Color.color(0,1,0));
             left.setText("Added Nutrient!");
         }
 
-        catch(Exception e) {
+        catch(Exception e) {//notifies user of error
             left.setTextFill(Color.color(1,0,0));
             left.setText("Invalid values given! Ensure the target value is a number!");
         }
@@ -295,7 +295,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
         String s = "The following nutrient deficiencies and surpluses were found within your entries: \n";
         for(Entry e : entries){//loops for every entry
             if(!e.getSurplusDeficiency().equals("")){
-                s = s + e.getSurplusDeficiency() +"\n";
+                s = s + e.getSurplusDeficiency() +"\n";//adds a new 'line' to the string for each deficiency/surplus
             }
         }
         detailView.setText(s);
@@ -370,12 +370,12 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
                     left.setText("Error in day comparison!");
                 }
 
-            } catch (Exception e) {
+            } catch (Exception e) {//handles invalid values in day two textField
                 left.setTextFill(Color.color(1,0,0));
                 left.setText("Please enter an integer for day two");
             }
 
-        } catch (Exception e) {
+        } catch (Exception e) {//handles invalid values in day one textFields
             left.setTextFill(Color.color(1,0,0));
             left.setText("Please enter an integer for day one");
         }
