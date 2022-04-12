@@ -7,6 +7,15 @@ import java.util.Comparator;
 import static java.lang.Double.isNaN;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Course: CPSC 233
+ * Names: Carter Tam and Omar Khan
+ * Date: Feb 28, 2022
+ * Tutorial: T06 (Amirhossein)
+ *
+ * EntryTable object is a table containing information for each entry that exists in the program. An entry is a record
+ * of a specified quantity of a particular nutrient consumed on a particular day.
+ */
 public class EntryTable {
     private ArrayList<Entry> inputs;
 

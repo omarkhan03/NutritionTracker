@@ -73,7 +73,7 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
                 while(scan.hasNextLine()){
                     String fileIn = scan.nextLine();
                     String[] in = fileIn.split(",");
-                    if (in.length == 5){//if there are 5 values in a line, it is stored as an entr
+                    if (in.length == 5){//if there are 5 values in a line, it is stored as an entry
                         Nutrient nutrient = new Nutrient(in[1], in[2], Double.parseDouble(in[3]));
                         Entry entry = new Entry(Integer.parseInt(in[0]), nutrient, Double.parseDouble(in[4]));
                         entries.add(entry);

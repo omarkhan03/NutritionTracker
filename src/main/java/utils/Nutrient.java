@@ -1,5 +1,14 @@
 package utils;
 
+/**
+ * Course: CPSC 233
+ * Names: Carter Tam and Omar Khan
+ * Date: Feb 28, 2022
+ * Tutorial: T06 (Amirhossein)
+ *
+ * Nutrient object is used to store data for each nutrient that exists in the program, including its measuring unit
+ * and target consumption value.
+ */
 public class Nutrient {
 
     private String name;

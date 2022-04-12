@@ -4,8 +4,14 @@ import org.testng.annotations.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
-
-
+/**
+ * Course: CPSC 233
+ * Names: Carter Tam and Omar Khan
+ * Date: Feb 28, 2022
+ * Tutorial: T06 (Amirhossein)
+ *
+ * Contains JUnit tests for the program.
+ */
 class NutrientTest {
 
     /**

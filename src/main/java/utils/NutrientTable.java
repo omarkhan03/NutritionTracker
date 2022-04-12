@@ -2,6 +2,14 @@ package utils;
 
 import java.util.ArrayList;
 
+/**
+ * Course: CPSC 233
+ * Names: Carter Tam and Omar Khan
+ * Date: Feb 28, 2022
+ * Tutorial: T06 (Amirhossein)
+ *
+ * NutrientTable object is a table containing information for each nutrient that exist in the program.
+ */
 public class NutrientTable {
 
     private ArrayList<Nutrient> inputs;
