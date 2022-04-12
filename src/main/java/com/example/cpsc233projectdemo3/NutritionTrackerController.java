@@ -202,7 +202,19 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
      */
     @FXML
     public void aboutInfo() {
-        Alert about = new Alert(Alert.AlertType.INFORMATION, "Created by Omar Khan and Carter Tam");
+        Alert about = new Alert(Alert.AlertType.INFORMATION,
+                """
+                        This is a nutrition tracker. 
+                        The user may enter nutrients and their target consumption goals, as well as enter the quantity of that nutrient consumed for any day (day 1, day 2, etc.).
+                        It can also display stored and calculated data.
+                        
+                        Created by Omar Khan and Carter Tam:
+                        omar.khan2@ucalgary.ca
+                        carter.tam@ucalgary.ca
+                        """);
+        about.setTitle("About Nutrition Tracker");
+        about.setHeaderText("About Nutrition Tracker");
+        about.setHeight(400);
         about.show();
     }
 
