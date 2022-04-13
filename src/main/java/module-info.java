@@ -2,7 +2,6 @@ module com.example.cpsc233projectdemo3 {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.testng;
-    requires org.junit.jupiter.api;
     requires java.desktop;
     requires java.sql;
 

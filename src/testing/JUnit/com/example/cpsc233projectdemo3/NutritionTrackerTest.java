@@ -1,53 +1,50 @@
-package utils;
+package com.example.cpsc233projectdemo3;
 
 import org.testng.annotations.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import utils.Entry;
+import utils.EntryTable;
+import utils.Nutrient;
+import utils.NutrientTable;
+
 import java.util.ArrayList;
 
-/**
- * Course: CPSC 233
- * Names: Carter Tam and Omar Khan
- * Date: Feb 28, 2022
- * Tutorial: T06 (Amirhossein)
- *
- * Contains JUnit tests for the program.
- */
-class NutrientTest {
+import static org.junit.jupiter.api.Assertions.*;
+public class NutritionTrackerTest {
 
     /**
      * The following 5 tests are for the getName function for the Nutrient class. The first test should return protein,
      * second should return calories, third should return fiber, fourth fat and last carbs.
      */
     @Test
-    void getNameProtein() {
+    public void getNameProtein() {
         Nutrient nutrient = new Nutrient("protein", "grams", 100);
         String expected = "protein";
         assertEquals(expected, nutrient.getName());
     }
 
     @Test
-    void getNameCalories() {
+    public void getNameCalories() {
         Nutrient nutrient = new Nutrient("calories", "kcal", 2000);
         String expected = "calories";
         assertEquals(expected, nutrient.getName());
     }
 
     @Test
-    void getNameFiber() {
+    public void getNameFiber() {
         Nutrient nutrient = new Nutrient("fiber", "g", 10);
         String expected = "fiber";
         assertEquals(expected, nutrient.getName());
     }
 
     @Test
-    void getNameFat() {
+    public void getNameFat() {
         Nutrient nutrient = new Nutrient("fat", "g", 50);
         String expected = "fat";
         assertEquals(expected, nutrient.getName());
     }
 
     @Test
-    void getNameCarbs() {
+    public void getNameCarbs() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 0.01);
         String expected = "carbs";
         assertEquals(expected, nutrient.getName());
@@ -59,35 +56,35 @@ class NutrientTest {
      * pounds.
      */
     @Test
-    void getUnitGrams() {
+    public void getUnitGrams() {
         Nutrient nutrient = new Nutrient("protein", "grams", 100);
         String expected = "grams";
         assertEquals(expected, nutrient.getUnit());
     }
 
     @Test
-    void getUnitKilograms() {
+    public void getUnitKilograms() {
         Nutrient nutrient = new Nutrient("fat", "kilograms", 100);
         String expected = "kilograms";
         assertEquals(expected, nutrient.getUnit());
     }
 
     @Test
-    void getUnitKg() {
+    public void getUnitKg() {
         Nutrient nutrient = new Nutrient("fiber", "kg", 100);
         String expected = "kg";
         assertEquals(expected, nutrient.getUnit());
     }
 
     @Test
-    void getUnitLbs() {
+    public void getUnitLbs() {
         Nutrient nutrient = new Nutrient("carbs", "lbs", 100);
         String expected = "lbs";
         assertEquals(expected, nutrient.getUnit());
     }
 
     @Test
-    void getUnitPounds() {
+    public void getUnitPounds() {
         Nutrient nutrient = new Nutrient("protein", "pounds", 100);
         String expected = "pounds";
         assertEquals(expected, nutrient.getUnit());
@@ -98,35 +95,35 @@ class NutrientTest {
      * 100, the second 100.12345, the third 5, the fourth 3.4 and the last 2400.
      */
     @Test
-    void getTarget100() {
+    public void getTarget100() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 100);
         double expected = 100;
         assertEquals(expected, nutrient.getTarget());
     }
 
     @Test
-    void getTarget100_decimal12345() {
+    public void getTarget100_decimal12345() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 100.12345);
         double expected = 100.12345;
         assertEquals(expected, nutrient.getTarget());
     }
 
     @Test
-    void getTarget5() {
+    public void getTarget5() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 5);
         double expected = 5;
         assertEquals(expected, nutrient.getTarget());
     }
 
     @Test
-    void getTarget3_decimal4() {
+    public void getTarget3_decimal4() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 3.4);
         double expected = 3.4;
         assertEquals(expected, nutrient.getTarget());
     }
 
     @Test
-    void getTarget2400() {
+    public void getTarget2400() {
         Nutrient nutrient = new Nutrient("carbs", "pounds", 2400);
         double expected = 2400;
         assertEquals(expected, nutrient.getTarget());
@@ -138,7 +135,7 @@ class NutrientTest {
      * consumption value.
      */
     @Test
-    void getDay1() {
+    public void getDay1() {
         Nutrient nutrient = new Nutrient("protein", "grams", 100);
         Entry entry = new Entry(1, nutrient, 100);
         int expected = 1;
@@ -146,7 +143,7 @@ class NutrientTest {
     }
 
     @Test
-    void getDay2() {
+    public void getDay2() {
         Nutrient nutrient = new Nutrient("protein", "grams", 100);
         Entry entry = new Entry(2, nutrient, 100);
         int expected = 2;
@@ -154,7 +151,7 @@ class NutrientTest {
     }
 
     @Test
-    void getDay13_1() {
+    public void getDay13_1() {
         Nutrient nutrient = new Nutrient("fiber", "grams", 100);
         Entry entry = new Entry(13, nutrient, 100);
         int expected = 13;
@@ -162,7 +159,7 @@ class NutrientTest {
     }
 
     @Test
-    void getDay13_2() {
+    public void getDay13_2() {
         Nutrient nutrient = new Nutrient("protein", "lbs", 100);
         Entry entry = new Entry(13, nutrient, 100);
         int expected = 13;
@@ -170,7 +167,7 @@ class NutrientTest {
     }
 
     @Test
-    void getDay13_3() {
+    public void getDay13_3() {
         Nutrient nutrient = new Nutrient("protein", "grams", 50);
         Entry entry = new Entry(13, nutrient, 115);
         int expected = 13;
@@ -182,7 +179,7 @@ class NutrientTest {
      * the second calories, the third fiber, the fourth carbs and the last fat.
      */
     @Test
-    void getNutrientNameProtein() {
+    public void getNutrientNameProtein() {
         Nutrient nutrient = new Nutrient("protein", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "protein";
@@ -190,7 +187,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientNameCalories() {
+    public void getNutrientNameCalories() {
         Nutrient nutrient = new Nutrient("calories", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "calories";
@@ -198,7 +195,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientNameFiber() {
+    public void getNutrientNameFiber() {
         Nutrient nutrient = new Nutrient("fiber", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "fiber";
@@ -206,7 +203,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientNameCarbs() {
+    public void getNutrientNameCarbs() {
         Nutrient nutrient = new Nutrient("carbs", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "carbs";
@@ -214,7 +211,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientNameFat() {
+    public void getNutrientNameFat() {
         Nutrient nutrient = new Nutrient("fat", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "fat";
@@ -226,7 +223,7 @@ class NutrientTest {
      * second pounds, the third kilograms, the fourth grams and the last just g.
      */
     @Test
-    void getNutrientUnitLbs() {
+    public void getNutrientUnitLbs() {
         Nutrient nutrient = new Nutrient("fat", "lbs", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "lbs";
@@ -234,7 +231,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientUnitPounds() {
+    public void getNutrientUnitPounds() {
         Nutrient nutrient = new Nutrient("fat", "pounds", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "pounds";
@@ -242,7 +239,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientUnitKilograms() {
+    public void getNutrientUnitKilograms() {
         Nutrient nutrient = new Nutrient("fat", "kilograms", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "kilograms";
@@ -250,7 +247,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientUnitGrams() {
+    public void getNutrientUnitGrams() {
         Nutrient nutrient = new Nutrient("fat", "grams", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "grams";
@@ -258,7 +255,7 @@ class NutrientTest {
     }
 
     @Test
-    void getNutrientUnitG() {
+    public void getNutrientUnitG() {
         Nutrient nutrient = new Nutrient("fat", "g", 100);
         Entry entry = new Entry(0, nutrient, 100);
         String expected = "g";
@@ -270,7 +267,7 @@ class NutrientTest {
      * 100, the second 200, the third 200 but with different nutrient parameters, the fourth 30.5, the last 5.12345
      */
     @Test
-    void getConsumption100() {
+    public void getConsumption100() {
         Nutrient nutrient = new Nutrient("fat", "g", 100);
         Entry entry = new Entry(0, nutrient, 100);
         double expected = 100;
@@ -278,7 +275,7 @@ class NutrientTest {
     }
 
     @Test
-    void getConsumption200() {
+    public void getConsumption200() {
         Nutrient nutrient = new Nutrient("fat", "g", 100);
         Entry entry = new Entry(0, nutrient, 200);
         double expected = 200;
@@ -286,7 +283,7 @@ class NutrientTest {
     }
 
     @Test
-    void getConsumption10() {
+    public void getConsumption10() {
         Nutrient nutrient = new Nutrient("fiber", "g", 10);
         Entry entry = new Entry(0, nutrient, 200);
         double expected = 200;
@@ -294,7 +291,7 @@ class NutrientTest {
     }
 
     @Test
-    void getConsumption30_decimal5() {
+    public void getConsumption30_decimal5() {
         Nutrient nutrient = new Nutrient("fat", "g", 100);
         Entry entry = new Entry(0, nutrient, 5);
         double expected = 5;
@@ -302,7 +299,7 @@ class NutrientTest {
     }
 
     @Test
-    void getConsumption5_decimal12345() {
+    public void getConsumption5_decimal12345() {
         Nutrient nutrient = new Nutrient("fat", "g", 100);
         Entry entry = new Entry(0, nutrient, 5.12345);
         double expected = 5.12345;
@@ -315,7 +312,7 @@ class NutrientTest {
      * surplus of calories, the last is no deficiency or surplus.
      */
     @Test
-    void getSurplusDeficiencyDeficiency() {
+    public void getSurplusDeficiencyDeficiency() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 90);
 
@@ -325,7 +322,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSurplusDeficiencySurplus() {
+    public void getSurplusDeficiencySurplus() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 110);
 
@@ -335,7 +332,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSurplusDeficiencyDeficiency_2() {
+    public void getSurplusDeficiencyDeficiency_2() {
         Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
         Entry entry = new Entry(2, nutrient, 2100);
 
@@ -345,7 +342,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSurplusDeficiencySurplus_2() {
+    public void getSurplusDeficiencySurplus_2() {
         Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
         Entry entry = new Entry(2, nutrient, 2800);
 
@@ -355,7 +352,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSurplusDeficiencyNone() {
+    public void getSurplusDeficiencyNone() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 100);
 
@@ -371,7 +368,7 @@ class NutrientTest {
      * a surplus rather than a deficiency.
      */
     @Test
-    void getSuccessfulTargets_Protein_Success() {
+    public void getSuccessfulTargets_Protein_Success() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 100);
 
@@ -381,7 +378,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSuccessfulTargets_Calories_Success() {
+    public void getSuccessfulTargets_Calories_Success() {
         Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
         Entry entry = new Entry(1, nutrient, 2500);
 
@@ -391,7 +388,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSuccessfulTargets_Fail_1() {
+    public void getSuccessfulTargets_Fail_1() {
         Nutrient nutrient = new Nutrient("calories", "kcal", 2500);
         Entry entry = new Entry(1, nutrient, 3000);
 
@@ -401,7 +398,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSuccessfulTargets_Fail_2() {
+    public void getSuccessfulTargets_Fail_2() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 60);
 
@@ -411,7 +408,7 @@ class NutrientTest {
     }
 
     @Test
-    void getSuccessfulTargets_Fail_3() {
+    public void getSuccessfulTargets_Fail_3() {
         Nutrient nutrient = new Nutrient("protein", "g", 100);
         Entry entry = new Entry(1, nutrient, 110);
 
@@ -426,7 +423,7 @@ class NutrientTest {
      * from the nutrientList, the fifth tests for no nutrients.
      */
     @Test
-    void createNutrientTable_1_Nutrient() {
+    public void createNutrientTable_1_Nutrient() {
         Nutrient fiber = new Nutrient("fiber", "g", 20);
 
         ArrayList<Nutrient> nutrientList;
@@ -447,7 +444,7 @@ class NutrientTest {
     }
 
     @Test
-    void createNutrientTable_2_Nutrients() {
+    public void createNutrientTable_2_Nutrients() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -471,7 +468,7 @@ class NutrientTest {
     }
 
     @Test
-    void createNutrientTable_3_Nutrients() {
+    public void createNutrientTable_3_Nutrients() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -498,7 +495,7 @@ class NutrientTest {
     }
 
     @Test
-    void createNutrientTable_Skipped_Nutrient() {
+    public void createNutrientTable_Skipped_Nutrient() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -523,7 +520,7 @@ class NutrientTest {
     }
 
     @Test
-    void createNutrientTable_No_Nutrients() {
+    public void createNutrientTable_No_Nutrients() {
 
         ArrayList<Nutrient> nutrientList;
         nutrientList = new ArrayList<Nutrient>();
@@ -547,7 +544,7 @@ class NutrientTest {
      * the fourth except calorie entry exists.
      */
     @Test
-    void getAverage_Protein() {
+    public void getAverage_Protein() {
         Nutrient protein = new Nutrient("protein", "g", 100);
 
         Entry dayOne = new Entry(1, protein, 100);
@@ -566,7 +563,7 @@ class NutrientTest {
     }
 
     @Test
-    void getAverage_Protein_Mixed() {
+    public void getAverage_Protein_Mixed() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -590,7 +587,7 @@ class NutrientTest {
     }
 
     @Test
-    void getAverage_Calories_Mixed() {
+    public void getAverage_Calories_Mixed() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -614,7 +611,7 @@ class NutrientTest {
     }
 
     @Test
-    void getAverage_Protein_3Days() {
+    public void getAverage_Protein_3Days() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -636,7 +633,7 @@ class NutrientTest {
     }
 
     @Test
-    void getAverage_Protein_3Days_Mixed() {
+    public void getAverage_Protein_3Days_Mixed() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -665,7 +662,7 @@ class NutrientTest {
      * each with 1 entry, the fourth tests a skipped entry, the last has no entries and should return an empty table.
      */
     @Test
-    void createEntryTable_1_Nutrient() {
+    public void createEntryTable_1_Nutrient() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -693,7 +690,7 @@ class NutrientTest {
     }
 
     @Test
-    void createEntryTable_2_Nutrients() {
+    public void createEntryTable_2_Nutrients() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -727,7 +724,7 @@ class NutrientTest {
     }
 
     @Test
-    void createEntryTable_3_Nutrients() {
+    public void createEntryTable_3_Nutrients() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -758,7 +755,7 @@ class NutrientTest {
     }
 
     @Test
-    void createEntryTable_Skipped_Entry() {
+    public void createEntryTable_Skipped_Entry() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -787,7 +784,7 @@ class NutrientTest {
     }
 
     @Test
-    void createEntryTable_No_Entries() {
+    public void createEntryTable_No_Entries() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
         Nutrient fiber = new Nutrient("fiber", "g", 20);
@@ -819,7 +816,7 @@ class NutrientTest {
      */
 
     @Test
-    void compareTwoDays_Protein() {
+    public void compareTwoDays_Protein() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -843,7 +840,7 @@ class NutrientTest {
     }
 
     @Test
-    void compareTwoDays_Calories() {
+    public void compareTwoDays_Calories() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -867,7 +864,7 @@ class NutrientTest {
     }
 
     @Test
-    void compareTwoDays_Calories_Reverse_Order() {
+    public void compareTwoDays_Calories_Reverse_Order() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -891,7 +888,7 @@ class NutrientTest {
     }
 
     @Test
-    void compareTwoDays_Protein_Reverse_Order() {
+    public void compareTwoDays_Protein_Reverse_Order() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -915,7 +912,7 @@ class NutrientTest {
     }
 
     @Test
-    void compareTwoDays_Equal() {
+    public void compareTwoDays_Equal() {
         Nutrient protein = new Nutrient("protein", "g", 100);
         Nutrient calories = new Nutrient("calories", "kcal", 2500);
 
@@ -937,5 +934,4 @@ class NutrientTest {
 
         assertEquals(expected, table.compareTwoDays("protein",1,2));
     }
-
 }
