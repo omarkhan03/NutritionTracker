@@ -111,44 +111,51 @@ public class NutritionTrackerController {//GUI FRAMEWORK FROM ASSIGNMENT 3 REUSE
      */
     @FXML
     public void saveFile() {
-        File file = currentFile;
-        if(!file.exists()){//creates file if it doesn't exit, as per lecture
-            try{
-                file.createNewFile();
-            }
-            catch(IOException e){
-                System.err.println("File could not be created: " + file);
-                System.exit(1);
-            }
-        }
-
-        if(file.isFile() && file.exists() && file.canWrite()){//Checking file existence, as per instructions from lecture
-            try{
-                FileWriter fw = new FileWriter(file);
-                PrintWriter printWriter = new PrintWriter(fw);
-
-                for(Entry e : entries){//stores entries in a csv format
-                    printWriter.println(e.getDay() + "," + e.getNutrientName() + "," + e.getNutrientUnit() + "," + e.getNutrientTarget() + "," + e.getConsumption());
+        try{
+            File file = currentFile;
+            if(!file.exists()){//creates file if it doesn't exit, as per lecture
+                try{
+                    file.createNewFile();
                 }
-
-                for(Nutrient n : nutrients){//stores nutrients in csv format
-                    printWriter.println(n.getName() + "," + n.getUnit() + "," + n.getTarget());
+                catch(IOException e){
+                    System.err.println("File could not be created: " + file);
+                    System.exit(1);
                 }
-                printWriter.flush();
-
-                left.setTextFill(Color.color(0,1,0));
-                left.setText("Save successful!");
             }
-            catch(IOException e){
+
+            if(file.isFile() && file.exists() && file.canWrite()){//Checking file existence, as per instructions from lecture
+                try{
+                    FileWriter fw = new FileWriter(file);
+                    PrintWriter printWriter = new PrintWriter(fw);
+
+                    for(Entry e : entries){//stores entries in a csv format
+                        printWriter.println(e.getDay() + "," + e.getNutrientName() + "," + e.getNutrientUnit() + "," + e.getNutrientTarget() + "," + e.getConsumption());
+                    }
+
+                    for(Nutrient n : nutrients){//stores nutrients in csv format
+                        printWriter.println(n.getName() + "," + n.getUnit() + "," + n.getTarget());
+                    }
+                    printWriter.flush();
+
+                    left.setTextFill(Color.color(0,1,0));
+                    left.setText("Save successful!");
+                }
+                catch(IOException e){
+                    left.setTextFill(Color.color(1,0,0));
+                    left.setText("File could not be found: " + file.getName());
+                    System.exit(1);
+                }
+            }
+            else{
                 left.setTextFill(Color.color(1,0,0));
-                left.setText("File could not be found: " + file.getName());
-                System.exit(1);
+                left.setText("Cannot write to file!");
             }
         }
-        else{
+        catch (Exception e){
             left.setTextFill(Color.color(1,0,0));
             left.setText("Cannot write to file!");
         }
+
     }
 
     /**
