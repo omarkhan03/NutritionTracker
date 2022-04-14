@@ -1,5 +1,13 @@
 package com.example.cpsc233projectdemo3;
 
+/**
+ * Course: CPSC 233
+ * Names: Carter Tam and Omar Khan
+ * Date: Feb 28, 2022
+ * Tutorial: T06 (Amirhossein)
+ *
+ * Controls events within the GUI
+ */
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
