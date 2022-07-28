@@ -1,8 +1,12 @@
 # CPSC233W22ProjectDemo3
 Course: CPSC 233
+
 Names: Carter Tam and Omar Khan
+
 Date: Feb 28, 2022
+
 Tutorial: T06 (Amirhossein)
+
 Directions to run:
 
 Open the directory containing the .jar file in the terminal
